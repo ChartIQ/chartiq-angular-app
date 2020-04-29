@@ -1,0 +1,34 @@
+@import '~chartiq/css/perfect-scrollbar.css';
+
+// Base styles required by the library to render color correctly.
+// If for some reason you are not including base-styles.css add these here.
+// @import '~chartiq/css/stx-chart.css'; // Chart API
+// @import '~chartiq/css/chartiq.css'; // Chart UI
+
+// Event Markers
+@import '~chartiq/examples/markers/markersSample.css';
+@import '~chartiq/examples/markers/tradeAnalyticsSample.css';
+@import '~chartiq/examples/markers/videoSample.css';
+
+// Plugins
+
+// Crypto, L2 Heat Map, Market Depth
+// @import '~chartiq/plugins/cryptoiq/cryptoiq.css';
+
+// Recognia
+// @import '~chartiq/plugins/recognia/ui.css';
+
+// ScriptIQ
+// @import '~chartiq/plugins/scriptiq/scriptiq-editor.css';
+
+// TFC plugin
+// @import '~chartiq/plugins/tfc/tfc.css';
+
+// Time Span Events
+// @import '~chartiq/plugins/timespanevent/timespanevent.css';
+
+// Trading Central
+// @import '~chartiq/plugins/tradingcentral/ui.css';
+
+// Visual Earnings
+// @import '~chartiq/plugins/visualearnings/visualearnings.css';

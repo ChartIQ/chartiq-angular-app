@@ -17,7 +17,7 @@ The application is built using the Angular 8.0 framework with [Angular CLI](http
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 7.5.0 or later.
+- A copy of the ChartIQ library, version 7.5.0.
 
     If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
 

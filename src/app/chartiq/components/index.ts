@@ -1,2 +1,2 @@
 export * from './advanced-chart/advanced-chart.component';
-export * from './hello-world/hello-world.component';
+export * from './multi-chart/multi-chart.component';

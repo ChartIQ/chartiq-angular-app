@@ -3,8 +3,6 @@
 import { CIQ } from 'chartiq/js/chartiq';
 import 'chartiq/js/advanced';
 
-import 'chartiq/js/advanced';
-
 import 'chartiq/js/addOns';
 
 // Symbol mapping to market definition
@@ -23,6 +21,8 @@ import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
 
+import "chartiq/js/extras/svgcharts/piechart.js";
+
 import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 // Uncomment the following for the forecasting simulator (required for the forecasting sample).
@@ -35,21 +35,21 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // Plugins
 
 // Crypto, L2 Heat Map, Market Depth, 
-// import 'chartiq/plugins/activetrader/cryptoiq';
+import 'chartiq/plugins/activetrader/cryptoiq';
 
 // ScriptIQ 
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
-// Trading Central: Technical Insights
-// import 'chartiq/plugins/technicalinsights/components'
-
 // TFC plugin
-// import 'chartiq/plugins/tfc/tfc-loader';
-// import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
+import 'chartiq/plugins/tfc/tfc-loader';
+import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
 
 // Time Span Events
 // import 'chartiq/plugins/timespanevent/timespanevent';
 // import 'chartiq/plugins/timespanevent/examples/timeSpanEventSample';  /* if using sample */
+
+// Trading Central: Technical Insights
+// import 'chartiq/plugins/technicalinsights/components'
 
 // Trading Central: Analyst Views
 // import 'chartiq/plugins/analystviews/components';
@@ -58,7 +58,7 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // import 'chartiq/plugins/visualearnings/visualearnings';
 
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
-// import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
+import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
 const config = getConfig({ 
 	quoteFeed,

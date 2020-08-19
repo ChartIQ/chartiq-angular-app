@@ -32,12 +32,18 @@
 								"glob": "**/*",
 								"input": "src/assets",
 								"output": "/resources/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/chartiq/js/thirdparty",
+								"output": "./js/thirdparty"
 							}
 						],
-						"styles": ["src/styles.scss", "src/app/chartiq/base-styles.scss"],
-						"scripts": [
-							"node_modules/chartiq/js/thirdparty/perfect-scrollbar.jquery.js"
-						]
+						"styles": [
+							"src/styles.scss",
+							"src/app/chartiq-base-styles.scss"
+						],
+						"scripts": []
 					},
 					"configurations": {
 						"production": {
@@ -47,6 +53,7 @@
 									"with": "src/environments/environment.prod.ts"
 								}
 							],
+							"baseHref": "./",
 							"optimization": true,
 							"outputHashing": "all",
 							"sourceMap": false,
@@ -68,6 +75,9 @@
 									"maximumError": "10kb"
 								}
 							]
+						},
+						"development": {
+							"baseHref": "/dist/chartiq-angular/"
 						}
 					}
 				},

@@ -1,25 +1,27 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 // Defines available Chartiq library resources for use in ChartService
-import { config } from './resources'; // ChartIQ library resources
-import { ChartService } from '../../chart.service'; // Angular service for CIQ resources
+import { CIQ, config } from './resources'; // ChartIQ library resources
+import { CustomChartService } from '../../custom-chart.service'; // Angular service for CIQ resources
 
 @Component({
-	selector: 'cq-advanced-chart',
-	templateUrl: './advanced-chart.component.html',
-	styleUrls: ['./advanced-chart.component.scss'],
+	selector: 'cq-angular-custom-chart',
+	templateUrl: './custom-chart.component.html',
+	styleUrls: ['./custom-chart.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	providers: [ChartService]
+	providers: [CustomChartService]
 })
-export class AdvancedChartComponent implements OnInit {
+export class CustomChartComponent implements OnInit {
 	@Input() symbol = '';
-	@Input() chartId = '_advanced-chart';
+	@Input() chartId = '_custom_chart';
 	@ViewChild('contextContainer', { static: true }) contextContainer: ElementRef;
 
-	constructor(public chartService: ChartService) {}
+	constructor(public chartService: CustomChartService) {}
 
 	ngOnInit() {
 		const container = this.contextContainer.nativeElement;
+
+		CIQ.debug = false;
 
 		// Customize configuration prior to passing it as parameter chart creation
 		config.initialSymbol = this.symbol || {
@@ -34,6 +36,11 @@ export class AdvancedChartComponent implements OnInit {
 		// const activeAddOns = { continuousZoom, outliers, tooltip };
 		// config.enabledAddOns = Object.assign(activeAddOns, config.enabledAddOns);
 		config.chartId = this.chartId;
+
+		// Remove forecasting addOn not used here
+		delete config.addOns.plotComplementer;
+		delete config.addOns.forecasting;
+
 
 		this.chartService.createChartAndUI({ container, config });  
 	}

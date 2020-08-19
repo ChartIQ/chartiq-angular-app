@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="title">Drawing tool shortcuts</div>
+	<div class="content">
+
+		<div class="list">
+			<table>
+				<tr>
+					<td (click)="sortBy('label')" title="Sort by label">Label</td>
+					<td (click)="sortBy('shortcut')" title="Sort by shortcut">Alt + Shortcut</td></tr>
+				<tr *ngFor="let item of drawingTools">
+					<td class="label" (click)="infoAbout(item.tool)">{{ item.label }}</td>
+					<td class="shortcut">
+						<input
+							type="text"
+							maxlength="1"
+							[value]="item.shortcut"
+							(input)="shortcutChanged(item.tool, $event)"
+							[class.duplicate]="item.duplicate"
+							>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="detail">
+			Detail about Tool: <b>{{ selectedTool.label || 'No tool has been selected'}}</b>
+			<div>{{ selectedTool.detail || '' }}</div>
+		</div>
+	</div>
+	<div class="action">
+		<button (click)="onSave()">Save</button>
+		<button (click)="onClose()">Cancel</button>
+	</div>
+</div>

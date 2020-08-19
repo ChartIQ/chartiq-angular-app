@@ -1,4 +1,6 @@
-# ChartIQ Angular application
+# ChartIQ Angular Application
+
+## Contents
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -11,19 +13,34 @@
 
 ## Overview
 
-The ChartIQ Angular application is the equivalent of ChartIQ's *technical-analysis-chart.html* advanced template in an Angular environment. See the [ChartIQ demo](https://demo.chartiq.com) for an example implementation of the template.
+The ChartIQ Angular application is a toolkit of components that enable you to build charting applications in the Angular framework. The components include everything from a basic chart to a complex, active trader desktop.
 
-The application is built using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support. A custom service, `ChartService`, connects the `AdvancedChartComponent` template UI markup with the ChartIQ library API and UI context.
+The application opens with a `RouteListComponent` that creates a home page containing links to other toolkit components, including:
+
+- `AdvancedChartComponent` &mdash; Creates a chart with a full-featured user interface
+- `MultiChartComponent` &mdash; Displays two advanced charts on screen simultaneously
+- `ActiveTraderComponent` &mdash; Creates an information-rich desktop for cryptocurrency traders and other active traders
+- `CustomChartComponent` &mdash; Integrates native Angular components with ChartIQ W3C-standard web components
+- `HelloWorldComponent` &mdash; Creates a basic chart with no user interface
+
+The ChartIQ Angular application was built using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
+
+**Note:**
+
+- This application has been designed to simplify the transfer of modules such as `src/app/active-trader-workstation` to existing applications. It is not expected that developers will use the application as is with all modules included. To minimize the transfer effort, resource and service files are more or less duplicated in each module.
+
+- For an example of creating a chart user interface entirely with native Angular components, see the [chartiq-angular-seed](https://github.com/ChartIQ/chartiq-angular-seed) project.
+
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 7.5.0.
+- A copy of the ChartIQ library, version 8.0.0 or later.
 
     If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
 
 ## Getting started
 
-To implement this project, do the following:
+To implement this project:
 
 1. Clone the repository
 2. Extract the contents of your zipped ChartIQ library package
@@ -32,34 +49,75 @@ To implement this project, do the following:
     - `npm install ./chartiq-x.x.x.tgz` to install the charting library
     - `npm install` to install the rest of the dependencies
     - `npm start` to start up the development server
-5. Open your browser to [http://localhost:4200](http://localhost:4200) to see the working application
+5. Open your browser to [http://localhost:4200](http://localhost:4200) to load the application
 
 ## Customization
 
-The `AdvancedChartComponent` template is a collection of ChartIQ's UI components. You can customize the chart user interface by modifying the template, including adding your own custom Angular components.
+### HTML templates
 
-You can configure a variety of chart features by modifying the configuration object provided to `ChartService` for the [AdvancedChartComponent](./src/app/chartiq/components/advanced-chart/advanced-chart.component.ts) initialization. The default configuration is part of the ChartIQ library. See *./node_modules/chartiq/examples/templates/js/sample-config.js* for all the configuration details.
+The HTML templates of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent` are collections of ChartIQ's user interface web components. You can customize the chart user interface by adding, removing, or modifying UI components. You can also add your own custom Angular components.
 
-And, of course, you can modify the CSS in *advanced-chart.component.scss*. See the [CSS Overview](https://documentation.chartiq.com/tutorial-CSS%20Overview.html) tutorial for information on customizing the chart look and feel.
+### Configuration
+
+You can configure a variety of chart features by modifying the configuration object provided to the component definition files of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. Look for the call to `CIQ.getConfig` in the definition files.
+
+The default configuration is part of the ChartIQ library. See *./node_modules/chartiq/examples/templates/js/sample-config.js* for all the configuration details.
+
+You can also modify the CSS in the style sheet files associated with `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. See the [CSS Overview](https://documentation.chartiq.com/tutorial-CSS%20Overview.html) tutorial for information on customizing the chart look and feel.
+
+### Component customization
+
+ChartIQ web components can be customized by extending the web component classes. Customization code should run at the time the chart and user interface are created; that is, in the `createChartAndUI` method. We recommend keeping all customization code in a single file or folder to simplify library version upgrades.
+
+Here's an example of customizing the `cq-chart-title` component:
+
+```js
+// Access the web component classes.
+import { CIQ } from 'chartiq/js/componentUI';
+
+// Access the class definition of the web component.
+const ChartTitle = CIQ.UI.components('cq-chart-title')[0].classDefinition;
+
+// Extend the web component class.
+class CustomChartTitle extends ChartTitle {
+    update() {
+        // Execute the original method.
+        super.update();
+        // Update the chart title.
+        const { symbol, symbolDisplay } = this.context.stx.chart;
+        // If symbolDisplay is available, use it in the document title.
+        if (symbolDisplay) {
+            document.title = document.title.replace(symbol, symbolDisplay);
+        }
+    }
+}
+
+// Update the web component definition.
+CIQ.UI.addComponentDefinition('cq-chart-title', CustomChartTitle);
+```
+
+### Component integration
+
+`CustomChartComponent` integrates native Angular components with ChartIQ's W3C-standard web components.
+
+The `cq-angular-recent-symbols` component provides an example of wrapping and enhancing a web component with an Angular component. `cq-angular-recent-symbols` adds a RECENT tab to the lookup controls created by ChartIQ's `cq-lookup` and `cq-comparison-lookup` web components. The RECENT tab displays a list of recently used financial instrument symbols maintained by the `cq-angular-recent-symbols` component.
+
+The `cq-angular-shortcut-dialog` component is an example of an Angular component accessed by a web component. User interaction with a dropdown menu created by a ChartIQ `cq-menu` web component opens the dialog box created by the `cq-angular-shortcut-dialog` component. The dialog box enables users to set shortcut keys on the chart's drawing tools.
 
 ## Enabling plug-ins
 
-Plug-ins are enabled by uncommenting the relevant imports in the component resources and stylesheet files.
+The ChartIQ library comes with a variety of plug-ins that add enhanced functionality to charts. The ChartIQ Angular application comes with the plug-ins built in but not enabled.
 
-For example, to enable the Trade From Chart (TFC) plug-in, uncomment the following lines in the [resources.ts](./src/app/chartiq/components/advanced-chart/resources.ts) file:
+**Note:** Plug-ins are optional extras that must be purchased. To determine the plug-ins included in your library, see the *./node_modules/chartiq/plugins* folder.
+
+The application includes the ChartIQ plug-ins as component resources that are enabled by uncommenting the relevant imports in the component resources file.
+
+For example, to enable the Trade from Chart (TFC) plug-in for `AdvancedChartComponent`, uncomment the following lines in the [resources.ts](./src/app/chartiq/components/advanced-chart/resources.ts) file in the *./src/app/chartiq/components/advanced-chart/* folder:
 
 ```ts
-import 'chartiq/plugins/tfc/tfc-loader';
-import 'chartiq/plugins/tfc/tfc-demo';
+// import 'chartiq/plugins/tfc/tfc-loader';
+// import 'chartiq/plugins/tfc/tfc-demo';
 ```
-
- and the following line in the [advanced-chart.component.scss](./src/app/chartiq/components/advanced-chart/advanced-chart.component.scss) file:
-
-```css
-@import '~chartiq/plugins/tfc/tfc.css';
-```
-
-Most plug-ins require enabling both the resource and the associated stylesheet.
 
 ## Questions and support
 

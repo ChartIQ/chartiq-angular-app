@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ChartService } from './chart.service';
+import { CustomChartService } from './custom-chart.service';
 
-describe('ChartService', () => {
+describe('CustomChartService', () => {
 	beforeEach(() => TestBed.configureTestingModule({}));
 
 	it('should be created', () => {
-		const service: ChartService = TestBed.get(ChartService);
+		const service: CustomChartService = TestBed.get(CustomChartService);
 		expect(service).toBeTruthy();
 	});
 });

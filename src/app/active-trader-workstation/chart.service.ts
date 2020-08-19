@@ -39,7 +39,7 @@ export class ChartService {
 	}
 
 	createChartAndUI({ container, config }) {
-		// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
+		// Prior to UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
 		// This is not required and is used just as an integration example
 		this.chart.breakpointSetter = () => value => {
 			// console.log('breakpoint value', value);
@@ -55,7 +55,7 @@ export class ChartService {
 		// taking advantage of stx availability as an instance member
 		this.channelSubscribe = channelSubscribe;
 
-		// Translate breakpoint channel in RxJs stream
+		// Translate breakpoint channel into RxJs stream
 		this.channelSubscribe(channels.breakpoint, value =>
 			this.breakpoint$.next(value)
 		);
@@ -74,32 +74,6 @@ export class ChartService {
 		// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
 		// );
 
-		this.postInit(container);
-
 		return uiContext;
 	}
-
-	postInit(container) {
-		portalizeContextDialogs(container);
-	}
-}
-
-/**
- * For applications that have more then one chart, keep single dialog of the same type
- * and move it outside context node to be shared by all chart components
- */
-function portalizeContextDialogs(container) {
-	container.querySelectorAll('cq-dialog').forEach(dialog => {
-		dialog.remove();
-		if (!dialogPortalized(dialog)) {
-			document.body.appendChild(dialog);
-		}
-	});
-}
-
-function dialogPortalized(el) {
-	const tag = el.firstChild.nodeName.toLowerCase();
-	return Array.from(document.querySelectorAll(tag)).some(
-		el => !CIQ.findClosestParent(el, 'cq-context')
-	);
 }

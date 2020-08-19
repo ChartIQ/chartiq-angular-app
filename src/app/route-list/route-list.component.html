@@ -1,0 +1,50 @@
+<h2>ChartIQ Angular Application</h2>
+
+<p class="description">The chartiq-angular-app project is a toolkit of Angular components.
+	The following components create complete charting applications: (Select the component names to
+	see the applications.)</p>
+
+<ul class="top-level">
+	<li>
+		<h3><a routerLink="/technical-analysis">AdvancedChartComponent</a></h3>
+		<p>
+			Creates a chart with a full-featured user interface. AdvancedChartComponent is
+			the equivalent of ChartIQ's technical-analysis-chart.html advanced template.
+		</p>
+	</li>
+	<li>
+	<h3><a routerLink="/multi-chart">MultiChartComponent</a></h3>
+		<p>
+			Displays two advanced chart components side by side in the same document.
+		</p>
+	</li>
+	<li>
+		<!-- 
+			Enable following line if Active Trader is available and uncomment Active Trader route in app.module.ts
+		-->
+		<!-- <h3><a routerLink="/active-trader">ActiveTraderComponent</a></h3> -->
+		<!-- Remove following line if Active Trader module is available -->
+		<h3 style="color: #999">ActiveTraderComponent (if module available enable link in route-list.component.html)</h3>
+		<p>
+			Features the advanced chart component enhanced with the following plug-ins:
+		</p>
+			<ul>
+				<li>Trade From Chart</li>
+				<li>Order Book</li>
+				<li>Trade Book</li>
+				<li>Market Depth Chart</li>
+			</ul>
+	</li>
+	<li>
+		<h3><a routerLink="/custom-chart">CustomChartComponent</a></h3>
+		<p>
+			Integrates native Angular components with ChartIQ web components.
+		</p>
+	</li>
+	<li>
+		<h3><a routerLink="/hello-world">HelloWorldComponent</a></h3>
+		<p>
+			Creates a basic chart with no user interface as a starting point for using the ChartIQ
+			API in Angular.
+	</li>
+</ul>

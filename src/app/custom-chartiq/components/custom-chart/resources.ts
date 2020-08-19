@@ -3,8 +3,6 @@
 import { CIQ } from 'chartiq/js/chartiq';
 import 'chartiq/js/advanced';
 
-import 'chartiq/js/advanced';
-
 import 'chartiq/js/addOns';
 
 // Symbol mapping to market definition
@@ -40,8 +38,8 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // ScriptIQ 
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
-// Trading Central: Technical Insights
-// import 'chartiq/plugins/technicalinsights/components'
+// Trading Central: Analyst Views
+// import 'chartiq/plugins/analystviews/components';
 
 // TFC plugin
 // import 'chartiq/plugins/tfc/tfc-loader';
@@ -51,8 +49,8 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // import 'chartiq/plugins/timespanevent/timespanevent';
 // import 'chartiq/plugins/timespanevent/examples/timeSpanEventSample';  /* if using sample */
 
-// Trading Central: Analyst Views
-// import 'chartiq/plugins/analystviews/components';
+// Trading Central: Technical Insights
+// import 'chartiq/plugins/technicalinsights/components';
 
 // Visual Earnings
 // import 'chartiq/plugins/visualearnings/visualearnings';

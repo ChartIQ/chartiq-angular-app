@@ -29,14 +29,14 @@ The ChartIQ Angular application was built using the Angular 8.0 framework with [
 
 - This application has been designed to simplify the transfer of modules such as `src/app/active-trader-workstation` to existing applications. It is not expected that developers will use the application as is with all modules included. To minimize the transfer effort, resource and service files are more or less duplicated in each module.
 
-- For an example of creating a chart user interface entirely with native Angular components, see the [chartiq-angular-seed](https://github.com/ChartIQ/chartiq-angular-seed) project.
+- For an example of creating a chart user interface entirely with native Angular components, see the [Charting-Library---Angular-Seed-Project](https://github.com/ChartIQ/Charting-Library---Angular-Seed-Project) project.
 
 
 ## Requirements
 
 - A copy of the ChartIQ library, version 8.0.0 or later.
 
-    If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
+    If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
 ## Getting started
 
@@ -59,9 +59,9 @@ The HTML templates of `AdvancedChartComponent`, `CustomChartComponent`, and `Act
 
 ### Configuration
 
-You can configure a variety of chart features by modifying the configuration object provided to the component definition files of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. Look for the call to `CIQ.getConfig` in the definition files.
+You can configure a variety of chart features by modifying the configuration object provided to the component definition files of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. Look for the call to `getConfig` in the resources files.
 
-The default configuration is part of the ChartIQ library. See *./node_modules/chartiq/examples/templates/js/sample-config.js* for all the configuration details.
+The default configuration is part of the ChartIQ library. See *./node_modules/chartiq/js/defaultConfiguration.js* for all the configuration details.
 
 You can also modify the CSS in the style sheet files associated with `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. See the [CSS Overview](https://documentation.chartiq.com/tutorial-CSS%20Overview.html) tutorial for information on customizing the chart look and feel.
 

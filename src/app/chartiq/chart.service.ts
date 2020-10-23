@@ -9,7 +9,7 @@ const {
 	observeProperty,
 	BaseComponent: {
 		prototype: { channelRead, channelWrite, channelSubscribe }
-	}
+	},
 } = CIQ.UI;
 
 /**
@@ -39,48 +39,47 @@ export class ChartService {
 	}
 
 	createChartAndUI({ container, config }) {
-		// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
-		// This is not required and is used just as an integration example
-		this.chart.breakpointSetter = () => value => {
-			// console.log('breakpoint value', value);
-		};
-		const uiContext = this.chart.createChartAndUI({ container, config });
-
-		this.stx = uiContext.stx;
-		this.uiContext = uiContext;
-
-		const { channels } = config;
-
-		// Attach channel methods to remove the need to provide stx parameter
-		// taking advantage of stx availability as an instance member
-		this.channelSubscribe = channelSubscribe;
-
-		// Translate breakpoint channel in RxJs stream
-		this.channelSubscribe(channels.breakpoint, value =>
-			this.breakpoint$.next(value)
-		);
-
-		// Additional ways of capturing state changes in chart engine and UI
-
-		// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
-		// stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
-		// Subscribe to created layout stream
-		// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + layout['timeUnit']));
-
-		// Observe a single property in engine layout
-		// observeProperty(
-		// 	'periodicity',
-		// 	stx.layout,
-		// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
-		// );
-
-		this.postInit(container);
-
-		return uiContext;
-	}
-
-	postInit(container) {
 		portalizeContextDialogs(container);
+
+		setTimeout(() => {
+			// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
+			// This is not required and is used just as an integration example
+			this.chart.breakpointSetter = () => value => {
+				// console.log('breakpoint value', value);
+			};
+			const uiContext = this.chart.createChartAndUI({ container, config });
+
+			this.stx = uiContext.stx;
+			this.uiContext = uiContext;
+
+			const { channels } = config;
+
+			// Attach channel methods to remove the need to provide stx parameter
+			// taking advantage of stx availability as an instance member
+			this.channelSubscribe = channelSubscribe;
+
+			// Translate breakpoint channel in RxJs stream
+			this.channelSubscribe(channels.breakpoint, value =>
+				this.breakpoint$.next(value)
+			);
+
+			// Additional ways of capturing state changes in chart engine and UI
+
+			// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
+			// this.stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
+			// Subscribe to created layout stream
+			// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (layout['timeUnit'] || 'day')));
+
+			// Observe a single property in engine layout
+			// observeProperty(
+			// 	'periodicity',
+			// 	this.stx.layout,
+			// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
+			// );
+
+			// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
+			// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
+		}, 0);
 	}
 }
 
@@ -100,6 +99,6 @@ function portalizeContextDialogs(container) {
 function dialogPortalized(el) {
 	const tag = el.firstChild.nodeName.toLowerCase();
 	return Array.from(document.querySelectorAll(tag)).some(
-		el => !CIQ.findClosestParent(el, 'cq-context')
+		el => !el.closest('cq-context')
 	);
 }

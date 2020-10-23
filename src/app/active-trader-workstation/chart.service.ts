@@ -63,14 +63,14 @@ export class ChartService {
 		// Additional ways of capturing state changes in chart engine and UI
 
 		// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
-		// stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
+		// this.stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
 		// Subscribe to created layout stream
-		// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + layout['timeUnit']));
+		// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (layout['timeUnit'] || 'day')));
 
 		// Observe a single property in engine layout
 		// observeProperty(
 		// 	'periodicity',
-		// 	stx.layout,
+		// 	this.stx.layout,
 		// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
 		// );
 

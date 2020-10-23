@@ -22,7 +22,7 @@ export class ActiveTraderComponent implements OnInit {
 	ngOnInit() {
 		const container = this.contextContainer.nativeElement;
 
-		CIQ.debug = false;
+		CIQ['debug'] = false;
 
 		// Customize configuration prior to passing it as parameter chart creation
 		// config.quoteFeeds[0].behavior.refreshInterval = 0;
@@ -46,6 +46,8 @@ export class ActiveTraderComponent implements OnInit {
 		config.menuChartPreferences = config.menuChartPreferences.filter(item => (
 			item.label !== 'Market Depth' && item.label !== 'Extended Hours'
 		));
+
+		config.addOns.tableView.coverContainer = "#mainChartGroup .chartContainer";
 
 		const uiContext = this.chartService.createChartAndUI({ container, config });
 
@@ -74,7 +76,7 @@ export class ActiveTraderComponent implements OnInit {
 		stx.changeOccurred("layout");
 
 		// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
-		CIQ.simulateL2({ stx, onInterval: 1000, onTrade: true });
+		CIQ["simulateL2"]({ stx, onInterval: 1000, onTrade: true });
 
 		stx.moneyFlowChart=moneyFlowChart(stx);
 
@@ -87,7 +89,7 @@ export class ActiveTraderComponent implements OnInit {
 
 			const pieChart=new CIQ.Visualization({
 				container: "cq-tradehistory-table div[pie-chart] div",
-				renderFunction: CIQ.SVGChart.renderPieChart,
+				renderFunction: CIQ["SVGChart"].renderPieChart,
 				colorRange: ["#8cc176","#b82c0c","#7c7c7c"],
 				className: "pie",
 				valueFormatter: CIQ.condenseInt

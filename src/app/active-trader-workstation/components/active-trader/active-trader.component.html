@@ -1,7 +1,3 @@
-
-
-
-
 <cq-context #contextContainer [ngClass]="chartService.breakpoint$ | async">
 
 	<div class="ciq-nav full-screen-hide">
@@ -27,6 +23,7 @@
 				<cq-toggle class="ciq-draw" cq-member="drawing"><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
 				<cq-toggle class="ciq-CH" cq-member="crosshair"><span></span><cq-tooltip>Crosshair</cq-tooltip></cq-toggle>
 				<cq-info-toggle></cq-info-toggle>
+				<cq-toggle class="ciq-DT" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
 			</div>
 		</cq-side-nav>
 
@@ -148,7 +145,7 @@
 
 			<div class="trade-toggles ciq-toggles">
 				<cq-toggle class="tfc-ui sidebar stx-trade" cq-member="tfc"><span></span><cq-tooltip>Trade</cq-tooltip></cq-toggle>
-				<cq-toggle class="tc-ui stx-tradingcentral"><span></span><cq-tooltip>Analyst Views</cq-tooltip></cq-toggle>
+				<cq-toggle class="tc-ui stx-analystviews"><span></span><cq-tooltip>Analyst Views</cq-tooltip></cq-toggle>
 			</div>
 
 		</div>
@@ -158,8 +155,8 @@
 	<!-- custom tag for scriptiq only works when plugin is loaded -->
 	<cq-scriptiq class="scriptiq-ui"></cq-scriptiq>
 
-	<!-- custom tag for tradingcentral only works when plugin is loaded -->
-	<cq-tradingcentral class="tc-ui" token="eZOrIVNU3KR1f0cf6PTUYg==" partner="1000" disabled></cq-tradingcentral>
+	<!-- custom tag for analystviews only works when plugin is loaded -->
+	<cq-analystviews class="tc-ui" token="eZOrIVNU3KR1f0cf6PTUYg==" partner="1000" disabled></cq-analystviews>
 
 	<div class="ciq-chart-area">
 		<div chartarea>

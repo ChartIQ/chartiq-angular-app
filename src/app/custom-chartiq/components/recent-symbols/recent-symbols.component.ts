@@ -23,7 +23,7 @@ export class RecentSymbolsComponent implements AfterContentInit {
 				for(let { target } of mutationsList) {
 					if(target.nodeName.toLowerCase() === 'cq-lookup') {
 						cnt += 1;
-						if (cnt === this.connectCount) observer.disconnect();  // found all elements 
+						if (cnt === self.connectCount) observer.disconnect();  // found all elements 
 						cb(target.parentElement);
 					};
 				}

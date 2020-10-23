@@ -34,7 +34,7 @@ The ChartIQ Angular application was built using the Angular 8.0 framework with [
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 8.0.0 or later.
+- A copy of the ChartIQ library, version 8.1.0 or later.
 
   If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
@@ -117,6 +117,20 @@ For example, to enable the Trade from Chart (TFC) plug-in for `AdvancedChartComp
 ```ts
 // import 'chartiq/plugins/tfc/tfc-loader';
 // import 'chartiq/plugins/tfc/tfc-demo';
+```
+
+To enable the Market Depth chart and L2 Heat Map for `AdvancedChartComponent`, uncomment the following lines in [resources.ts](./src/app/chartiq/components/advanced-chart/resources.ts):
+
+```js
+// import 'chartiq/plugins/activetrader/cryptoiq';
+
+// import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
+```
+
+and the following line in [chart.service.ts](./src/app/chartiq/chart.service.ts):
+
+```js
+// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
 ```
 
 ## Questions and support

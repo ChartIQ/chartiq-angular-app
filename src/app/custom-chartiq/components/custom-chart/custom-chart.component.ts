@@ -21,7 +21,7 @@ export class CustomChartComponent implements OnInit {
 	ngOnInit() {
 		const container = this.contextContainer.nativeElement;
 
-		CIQ.debug = false;
+		CIQ['debug'] = false;
 
 		// Customize configuration prior to passing it as parameter chart creation
 		config.initialSymbol = this.symbol || {

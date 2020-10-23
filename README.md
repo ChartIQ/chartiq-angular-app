@@ -29,7 +29,7 @@ The ChartIQ Angular application was built using the Angular 8.0 framework with [
 
 - This application has been designed to simplify the transfer of modules such as `src/app/active-trader-workstation` to existing applications. It is not expected that developers will use the application as is with all modules included. To minimize the transfer effort, resource and service files are more or less duplicated in each module.
 
-- For an example of creating a chart user interface entirely with native Angular components, see the [Charting-Library---Angular-Seed-Project](https://github.com/ChartIQ/Charting-Library---Angular-Seed-Project) project.
+- For an example of creating a chart user interface entirely with native Angular components, see the [chartiq-angular-seed](https://github.com/ChartIQ/chartiq-angular-seed) project.
 
 
 ## Requirements

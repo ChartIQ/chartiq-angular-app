@@ -26,7 +26,7 @@ import 'chartiq/examples/markers/videoSample';
 import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 // Uncomment the following for the forecasting simulator (required for the forecasting sample).
-// import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
+import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
 
@@ -62,7 +62,7 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 
 const config = getConfig({ 
 	quoteFeed,
-	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+	forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
 	markerSample: marker.MarkersSample,
 	scrollStyle: PerfectScrollbar,
 });

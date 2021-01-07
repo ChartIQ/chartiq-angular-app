@@ -33,6 +33,8 @@ export class AdvancedChartComponent implements OnInit {
 		// const { tooltip, continuousZoom, outliers } = config.addOns;
 		// const activeAddOns = { continuousZoom, outliers, tooltip };
 		// config.enabledAddOns = Object.assign(activeAddOns, config.enabledAddOns);
+		config.enabledAddOns.forecasting = true;
+
 		config.chartId = this.chartId;
 
 		this.chartService.createChartAndUI({ container, config });  

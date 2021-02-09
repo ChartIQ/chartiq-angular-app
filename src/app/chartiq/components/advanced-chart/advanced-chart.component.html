@@ -8,7 +8,8 @@
 				class="ciq-sidenav" 
 				cq-member="sidenav" 
 				cq-toggles="sidenavOn,sidenavOff"
-				cq-toggle-classes="active,"><span></span>
+				cq-toggle-classes="active,"
+				keyboard-navigation="false"><span></span>
 				<cq-tooltip>More</cq-tooltip>
 			</cq-toggle>
 		</div>
@@ -21,9 +22,41 @@
 		<cq-side-nav cq-on="sidenavOn">
 			<div class="icon-toggles ciq-toggles">
 				<cq-toggle class="ciq-draw" cq-member="drawing"><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
-				<cq-toggle class="ciq-CH" cq-member="crosshair"><span></span><cq-tooltip>Crosshair</cq-tooltip></cq-toggle>
-				<cq-info-toggle></cq-info-toggle>
-				<cq-toggle class="ciq-DT" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
+				<cq-info-toggle-dropdown>
+					<cq-toggle 
+						class="ciq-CH" 
+						cq-member="crosshair">
+						<span></span>
+						<cq-tooltip>Crosshair (Alt + \)</cq-tooltip>
+					</cq-toggle>
+	
+					<cq-menu class="ciq-menu toggle-options collapse">
+						<span></span>
+						<cq-menu-dropdown>
+							<cq-item cq-member="crosshair">Hide Heads-Up Display<span class="ciq-radio"><span></span></span></cq-item>
+							<cq-item cq-member="headsUp-static">Show Heads-Up Display<span class="ciq-radio"><span></span></span></cq-item>
+						</cq-menu-dropdown>
+					</cq-menu>
+				</cq-info-toggle-dropdown>
+	
+				<cq-info-toggle-dropdown>
+					<cq-toggle
+						class="ciq-HU"
+						cq-member="headsUp">
+						<span></span>
+						<cq-tooltip>Info</cq-tooltip>
+					</cq-toggle>
+	
+					<cq-menu class="ciq-menu toggle-options collapse tooltip-ui">
+						<span></span>
+						<cq-menu-dropdown>
+							<cq-item cq-member="headsUp-dynamic">Show Dynamic Callout<span class="ciq-radio"><span></span></span></cq-item>
+							<cq-item cq-member="headsUp-floating">Show Tooltip<span class="ciq-radio"><span></span></span></cq-item>
+						</cq-menu-dropdown>
+					</cq-menu>
+				</cq-info-toggle-dropdown>
+	
+				<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
 			</div>
 		</cq-side-nav>
 
@@ -57,9 +90,9 @@
 				</cq-menu-dropdown>
 			</cq-menu>
 
-				<cq-menu class="ciq-menu ciq-studies collapse">
+				<cq-menu class="ciq-menu ciq-studies collapse" cq-focus="input">
 					<span>Studies</span>
-					<cq-menu-dropdown cq-no-scroll>
+					<cq-menu-dropdown>
 						<cq-study-legend cq-no-close>
 							<cq-section-dynamic>
 								<cq-heading>Current Studies</cq-heading>
@@ -83,9 +116,7 @@
 							<cq-separator></cq-separator>
 						</div>
 						<cq-heading cq-filter cq-filter-min="-1">Studies</cq-heading>
-						<cq-scroll cq-no-maximize>
-							<cq-studies></cq-studies>
-						</cq-scroll>
+						<cq-studies></cq-studies>
 					</cq-menu-dropdown>
 				</cq-menu>
 
@@ -141,6 +172,11 @@
 							<cq-item><cq-clickable cq-selector="cq-timezone-dialog" cq-method="open">Change Timezone</cq-clickable></cq-item>
 							<cq-item stxsetget="Layout.Language()"><cq-flag></cq-flag><cq-language-name>Change Language</cq-language-name></cq-item>
 						</cq-menu-dropdown-section>
+						<cq-menu-dropdown-section class="shortcuts-ui">
+							<cq-separator></cq-separator>
+							<cq-heading>Shortcuts</cq-heading>
+							<cq-item stxtap="Layout.showShortcuts(true)">Shortcuts / Hotkeys</cq-item>
+						</cq-menu-dropdown-section>
 					</cq-menu-dropdown>
 				</cq-menu>
 			</div>
@@ -164,32 +200,33 @@
 	<!-- custom tag for technicalinsights only works when plugin is loaded -->
 	<cq-technicalinsights uid="" lang="en" disabled></cq-technicalinsights> 
 
-	<cq-recent-symbols>
-		<div class="ciq-chart-area">
-			<div class="ciq-chart">
 	
-				<cq-palette-dock>
-					<div class="palette-dock-container">
-						<cq-drawing-palette class="palette-drawing grid palette-hide" docked="true" orientation="vertical" min-height="300" cq-drawing-edit="none"></cq-drawing-palette>
-						<cq-drawing-settings class="palette-settings" docked="true" hide="true" orientation="horizontal" min-height="40" cq-drawing-edit="none"></cq-drawing-settings>
-					</div>
-				</cq-palette-dock>
+	<div class="ciq-chart-area">
+		<div class="ciq-chart">
 
-				<div class="chartContainer">
+			<cq-message-toaster defaultDisplayTime="10" defaultTransition="slide" defaultPosition="top"></cq-message-toaster>
 
-					<cq-chart-title cq-marker cq-browser-tab></cq-chart-title>
-
-					<cq-chartcontrol-group class="full-screen-show" cq-marker></cq-chartcontrol-group>
-
-					<cq-comparison-lookup></cq-comparison-lookup>
-
-					<cq-chart-legend></cq-chart-legend>
-
-					<cq-loader></cq-loader>
+			<cq-palette-dock>
+				<div class="palette-dock-container">
+					<cq-drawing-palette class="palette-drawing grid palette-hide" docked="true" orientation="vertical" min-height="300" cq-drawing-edit="none"></cq-drawing-palette>
+					<cq-drawing-settings class="palette-settings" docked="true" hide="true" orientation="horizontal" min-height="40" cq-drawing-edit="none"></cq-drawing-settings>
 				</div>
+			</cq-palette-dock>
+
+			<div class="chartContainer">
+
+				<cq-chart-title cq-marker cq-browser-tab></cq-chart-title>
+
+				<cq-chartcontrol-group class="full-screen-show" cq-marker></cq-chartcontrol-group>
+
+				<cq-comparison-lookup></cq-comparison-lookup>
+
+				<cq-chart-legend></cq-chart-legend>
+
+				<cq-loader></cq-loader>
 			</div>
 		</div>
-	</cq-recent-symbols>
+	</div>
 
 	<!-- Markers/Events -->
 	<cq-abstract-marker cq-type="helicopter"></cq-abstract-marker>
@@ -200,6 +237,7 @@
 
 	<div class="ciq-footer full-screen-hide">
 		<cq-share-button></cq-share-button>
+		<div class="shortcuts-ui ciq-shortcut-button" stxtap="Layout.showShortcuts()" title="Toggle shortcut legend"></div>
 		<cq-show-range></cq-show-range>
 	</div>
 

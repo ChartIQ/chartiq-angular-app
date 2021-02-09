@@ -77,7 +77,7 @@
 							]
 						},
 						"development": {
-							"baseHref": "/dist/chartiq-angular/"
+							"baseHref": "/dist/chartiq-angular/",
 						}
 					}
 				},

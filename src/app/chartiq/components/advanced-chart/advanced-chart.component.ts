@@ -30,10 +30,12 @@ export class AdvancedChartComponent implements OnInit {
 		// config.quoteFeeds[0].behavior.refreshInterval = 0;
 
 		// Enable any extra addOns here before creating the chart
-		// const { tooltip, continuousZoom, outliers } = config.addOns;
-		// const activeAddOns = { continuousZoom, outliers, tooltip };
-		// config.enabledAddOns = Object.assign(activeAddOns, config.enabledAddOns);
+		// config.enabledAddOns.forecasting = true;
+		// config.enabledAddOns.tooltip = false;
 		config.chartId = this.chartId;
+
+		// callback when chart is initialized and intial data available
+		config.onChartReady = (stx) => { /* stx is the chart engine */ };
 
 		this.chartService.createChartAndUI({ container, config });  
 	}

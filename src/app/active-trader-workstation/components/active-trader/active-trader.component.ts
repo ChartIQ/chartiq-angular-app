@@ -29,9 +29,9 @@ export class ActiveTraderComponent implements OnInit {
 		config.initialSymbol = '^USDAUD';
 
 		// Enable any extra addOns here before creating the chart
-		// const { tooltip, continuousZoom, outliers } = config.addOns;
-		// const activeAddOns = { continuousZoom, outliers, tooltip };
-		// config.enabledAddOns = Object.assign(activeAddOns, config.enabledAddOns);
+		// config.enabledAddOns.forecasting = true;
+		// config.enabledAddOns.tooltip = false;
+
 		config.chartId = this.chartId;
 
 		config.plugins.marketDepth = {
@@ -49,13 +49,17 @@ export class ActiveTraderComponent implements OnInit {
 
 		config.addOns.tableView.coverContainer = "#mainChartGroup .chartContainer";
 
+		// callback when chart is initialized and intial data available
+		config.onChartReady = (stx) => { /* stx is the chart engine */ };
+
 		const uiContext = this.chartService.createChartAndUI({ container, config });
 
+		this.cryptoSetup(uiContext.stx)
 		if (window['d3']) {
-			this.cryptoSetup(uiContext.stx);
+			this.setUpMoneyFlowChart(uiContext.stx);
 		} else {
 			CIQ.loadScript('https://d3js.org/d3.v5.min.js', () => {
-				this.cryptoSetup(uiContext.stx);
+				this.setUpMoneyFlowChart(uiContext.stx);
 			})
 		}
 
@@ -67,7 +71,7 @@ export class ActiveTraderComponent implements OnInit {
 		stx.setChartType("line");
 		CIQ.extend(stx.layout,{
 			crosshair:true,
-			headsUp:"static",
+			headsUp:{ static: true },
 			l2heatmap:true,
 			rangeSlider:true,
 			marketDepth:true,
@@ -77,7 +81,9 @@ export class ActiveTraderComponent implements OnInit {
 
 		// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
 		CIQ["simulateL2"]({ stx, onInterval: 1000, onTrade: true });
+	}
 
+	setUpMoneyFlowChart(stx) {
 		stx.moneyFlowChart=moneyFlowChart(stx);
 
 		function moneyFlowChart(stx){
@@ -119,4 +125,3 @@ export class ActiveTraderComponent implements OnInit {
 		}
 	}
 }
-

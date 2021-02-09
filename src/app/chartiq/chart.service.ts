@@ -8,7 +8,7 @@ const {
 	Chart,
 	observeProperty,
 	BaseComponent: {
-		prototype: { channelRead, channelWrite, channelSubscribe }
+		prototype: { channelRead, channelWrite, channelSubscribe },
 	},
 } = CIQ.UI;
 

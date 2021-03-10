@@ -1,3 +1,6 @@
+# Customer library files
+src/chartiq_library
+
 # library in npm tarball format
 # chartiq-*.tgz
 

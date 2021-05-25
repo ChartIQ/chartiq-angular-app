@@ -13,30 +13,30 @@
 
 ## Overview
 
-The ChartIQ Angular application is a toolkit of components that enable you to build charting applications in the Angular framework. The components include everything from a basic chart to a complex, active trader desktop.
+The ChartIQ Angular application is a toolkit of components that enable you to build charting applications in the Angular framework. The components include everything from a basic chart to a complex, active trader desktop:
 
-The application opens with a `RouteListComponent` that creates a home page containing links to other toolkit components, including:
-
-- `AdvancedChartComponent` &mdash; Creates a chart with a full-featured user interface
+- `AdvancedChartComponent` &mdash; Creates a full-featured chart with a fully developed user interface
 - `MultiChartComponent` &mdash; Displays two advanced charts on screen simultaneously
-- `ActiveTraderComponent` &mdash; Creates an information-rich desktop for cryptocurrency traders and other active traders
+- `ActiveTraderComponent` &mdash; Sets up an information-rich desktop for traders who trade frequently
+- `TermStructureComponent` &mdash; Creates a term structure chart for working with non&ndash;time series data
 - `CustomChartComponent` &mdash; Integrates native Angular components with ChartIQ W3C-standard web components
-- `HelloWorldComponent` &mdash; Creates a basic chart with no user interface
+- `HelloWorldComponent` &mdash; Creates a basic chart with no user interface as a starting point for your Angular app
 
 The ChartIQ Angular application was built using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 
 **Note:**
 
-- This application has been designed to simplify the transfer of modules such as `src/app/active-trader-workstation` to existing applications. It is not expected that developers will use the application as is with all modules included. To minimize the transfer effort, resource and service files are more or less duplicated in each module.
+- This application has been designed to simplify the transfer of modules such as `src/app/active-trader-workstation` to other applications. We don't expect that developers will use the application as is with all modules included. So, to make transferring modules easier, we more or less duplicated resource and service files in each module.
 
 - For an example of creating a chart user interface entirely with native Angular components, see the [chartiq-angular-seed](https://github.com/ChartIQ/chartiq-angular-seed) project.
 
-
 ## Requirements
 
-- A copy of the ChartIQ library, version 8.2.0 for this release.
+A copy of the ChartIQ library, version 8.3.0 or later.
 
-  If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
+If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
+
+To get a free trial version of the library, go to the ChartIQ <a href="https://cosaic.io/chartiq-sdk-library-download/" target="_blank">download site</a>.
 
 ## Getting started
 
@@ -51,19 +51,26 @@ To implement this project:
     - `npm start` to start up the development server
 5. Open your browser to [http://localhost:4200](http://localhost:4200) to load the application
 
+**Note:** When you are upgrading or changing your license, we recommend that you completely remove the old library before reinstalling the new one, for example:
+
+```sh
+npm uninstall chartiq
+npm install ./chartiq-x.x.x.tgz
+```
+
 ## Customization
 
 ### HTML templates
 
-The HTML templates of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent` are collections of ChartIQ's user interface web components. You can customize the chart user interface by adding, removing, or modifying UI components. You can also add your own custom Angular components.
+The HTML templates of `AdvancedChartComponent`, `CustomChartComponent`, `ActiveTraderComponent`, and `TermStructureComponent` are collections of ChartIQ's user interface web components. You can customize the chart user interface by adding, removing, or modifying UI components. You can also add your own custom Angular components.
 
 ### Configuration
 
-You can configure a variety of chart features by modifying the configuration object provided to the component definition files of `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. Look for the call to `getConfig` in the resources files.
+You can configure a variety of chart features by modifying the configuration object provided to the component definition files of `AdvancedChartComponent`, `CustomChartComponent`, `ActiveTraderComponent`, and `TermStructureComponent`. Look for the call to `getConfig` in the resources files.
 
-The default configuration is part of the ChartIQ library. See *./node_modules/chartiq/js/defaultConfiguration.js* for all the configuration details.
+A default configuration is part of the ChartIQ library. See the [Chart Configuration](tutorial-Chart%20Configuration.html) tutorial for all the configuration details.
 
-You can also modify the CSS in the style sheet files associated with `AdvancedChartComponent`, `CustomChartComponent`, and `ActiveTraderComponent`. See the [CSS Overview](https://documentation.chartiq.com/tutorial-CSS%20Overview.html) tutorial for information on customizing the chart look and feel.
+You can also modify the CSS in the style sheet files associated with `AdvancedChartComponent`, `CustomChartComponent`, `ActiveTraderComponent`, and `TermStructureComponent`. See the [CSS Overview](https://documentation.chartiq.com/tutorial-CSS%20Overview.html) tutorial for information on customizing the chart look and feel.
 
 ### Component customization
 
@@ -112,14 +119,14 @@ The ChartIQ library comes with a variety of plug-ins that add enhanced functiona
 
 The application includes the ChartIQ plug-ins as component resources that are enabled by uncommenting the relevant imports in the component resources file.
 
-For example, to enable the Trade from Chart (TFC) plug-in for `AdvancedChartComponent`, uncomment the following lines in the [resources.ts](./src/app/chartiq/components/advanced-chart/resources.ts) file in the *./src/app/chartiq/components/advanced-chart/* folder:
+For example, to enable the Trade from Chart (TFC) plug-in for `AdvancedChartComponent`, uncomment the following lines in the [resources.ts](./src/app/chartiq/components/resources.ts) file in the *./src/app/chartiq/components/* folder:
 
 ```ts
 // import 'chartiq/plugins/tfc/tfc-loader';
 // import 'chartiq/plugins/tfc/tfc-demo';
 ```
 
-To enable the Market Depth chart and L2 Heat Map for `AdvancedChartComponent`, uncomment the following lines in [resources.ts](./src/app/chartiq/components/advanced-chart/resources.ts):
+To enable the Market Depth chart and L2 Heat Map for `AdvancedChartComponent`, uncomment the following lines in [resources.ts](./src/app/chartiq/components/resources.ts):
 
 ```js
 // import 'chartiq/plugins/activetrader/cryptoiq';
@@ -140,4 +147,4 @@ and the following line in [chart.service.ts](./src/app/chartiq/chart.service.ts)
 
 ## Contributing to this project
 
-Contribute to this project. Fork it and send us a pull request. We'd love to see what you can do with our charting tools!
+Fork it and send us a pull request. We'd love to see what you can do with our charting tools in Angular!

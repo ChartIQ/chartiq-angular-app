@@ -58,6 +58,14 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
+function getDefaultConfig () {
+	return getConfig({
+		quoteFeed,
+		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+		scrollStyle: PerfectScrollbar,
+	});
+}
+
 const config = getConfig({ 
 	quoteFeed,
 	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
@@ -65,4 +73,4 @@ const config = getConfig({
 	scrollStyle: PerfectScrollbar,
 });
 
-export { CIQ, config };
+export { CIQ, getDefaultConfig };

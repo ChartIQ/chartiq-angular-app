@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 // defines resources for use in ChartService providing a way to configurate service 
-import { CIQ, config } from './resources';
+import { CIQ, getDefaultConfig } from './resources';
 import { ChartService } from '../../chart.service';
 
 const { channelWrite } = CIQ.UI.BaseComponent.prototype;
@@ -13,7 +13,7 @@ const { channelWrite } = CIQ.UI.BaseComponent.prototype;
 	encapsulation: ViewEncapsulation.None,
 	providers: [ChartService]
 })
-export class ActiveTraderComponent implements OnInit {
+export class ActiveTraderComponent implements OnInit, OnDestroy {
 	@ViewChild('contextContainer', { static: true }) contextContainer: ElementRef;
 	@Input() chartId = '_active_trader';
 
@@ -26,9 +26,11 @@ export class ActiveTraderComponent implements OnInit {
 
 		// Customize configuration prior to passing it as parameter chart creation
 		// config.quoteFeeds[0].behavior.refreshInterval = 0;
+		const config = getDefaultConfig();
 		config.initialSymbol = '^USDAUD';
 
 		// Enable any extra addOns here before creating the chart
+		config.enabledAddOns.animation = true;
 		// config.enabledAddOns.forecasting = true;
 		// config.enabledAddOns.tooltip = false;
 
@@ -65,6 +67,10 @@ export class ActiveTraderComponent implements OnInit {
 
 		// Request TFC channel open
 		channelWrite(config.channels.tfc, true, uiContext.stx);		
+	}
+
+	ngOnDestroy() {
+		this.chartService.destroyChart();
 	}
 
 	cryptoSetup(stx) {

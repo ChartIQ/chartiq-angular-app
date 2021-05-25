@@ -13,11 +13,11 @@ const {
 } = CIQ.UI;
 
 /**
- * Creates chart engine and UI
+ * Creates the chart engine and UI.
  *
- * Service is expected to be used as provider in a chart component such as AdvancedChart
- * The component is responsible for providing configuration as parameter and import of all
- * required resources chart for such as market definitions, addOns, plugins
+ * Service is expected to be used as a provider in a chart component such as AdvancedChart. The
+ * component is responsible for providing configuration as a parameter and for the import of all
+ * required resources for the chart such as market definitions, add-ons, and plug-ins.
  */
 @Injectable()
 export class ChartService {
@@ -36,6 +36,13 @@ export class ChartService {
 	createChart(container: HTMLElement, config = null) {
 		this.stx = this.chart.createChart(container, config);
 		return this.stx;
+	}
+
+	destroyChart() {
+		if (this.stx) {
+			this.stx.destroy();
+			this.stx.draw = () => {};
+		}
 	}
 
 	createChartAndUI({ container, config }) {

@@ -60,11 +60,29 @@ import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
-const config = getConfig({ 
-	quoteFeed,
-	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-	markerSample: marker.MarkersSample,
-	scrollStyle: PerfectScrollbar,
-});
+function getDefaultConfig() {
+	const config = getConfig({ 
+		quoteFeed,
+		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+		markerSample: marker.MarkersSample,
+		scrollStyle: PerfectScrollbar,
+	});
 
-export { CIQ, config };
+	const { 
+		marketDepth,
+		tfc,
+		timeSpanEventPanel,
+		visualEarnings
+	} = config.plugins;
+	// Select only plugin configurations that needs to be active for this chart
+	config.plugins = { 
+		marketDepth,
+		tfc,
+		// timeSpanEventPanel,
+		// visualEarnings
+	};
+	
+	return config;
+}
+
+export { CIQ, getDefaultConfig };

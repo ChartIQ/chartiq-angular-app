@@ -2,18 +2,22 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { AdvancedChartComponent, MultiChartComponent } from './components';
+import {
+	AdvancedChartComponent,
+	AdvancedChartWrapperComponent,
+	MultiChartComponent
+} from './components';
 
 @NgModule({
-	declarations: [AdvancedChartComponent, MultiChartComponent],
+	declarations: [AdvancedChartComponent, MultiChartComponent, AdvancedChartWrapperComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	imports: [
 		CommonModule,
 		RouterModule.forChild([
-			{ path: 'technical-analysis', component: AdvancedChartComponent },
+			{ path: 'technical-analysis', component: AdvancedChartWrapperComponent },
 			{ path: 'multi-chart', component: MultiChartComponent }
 		])
 	],
-	exports: [AdvancedChartComponent, MultiChartComponent]
+	exports: [AdvancedChartComponent, AdvancedChartWrapperComponent, MultiChartComponent]
 })
 export class ChartiqModule {}

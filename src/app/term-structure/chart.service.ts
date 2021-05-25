@@ -41,12 +41,10 @@ export class ChartService {
 	destroyChart() {
 		if (this.stx) {
 			this.stx.destroy();
-			this.stx.draw = () => {};
 		}
 	}
 
 	createChartAndUI({ container, config }) {
-		portalizeContextDialogs(container);
 
 		setTimeout(() => {
 			// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
@@ -75,7 +73,7 @@ export class ChartService {
 			// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
 			// this.stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
 			// Subscribe to created layout stream
-			// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (layout['timeUnit'] || 'day')));
+			// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (laqyout['timeUnit'] || 'day')));
 
 			// Observe a single property in engine layout
 			// observeProperty(
@@ -84,28 +82,6 @@ export class ChartService {
 			// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
 			// );
 
-			// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
-			// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
 		}, 0);
 	}
-}
-
-/**
- * For applications that have more then one chart, keep single dialog of the same type
- * and move it outside context node to be shared by all chart components
- */
-function portalizeContextDialogs(container) {
-	container.querySelectorAll('cq-dialog').forEach(dialog => {
-		dialog.remove();
-		if (!dialogPortalized(dialog)) {
-			document.body.appendChild(dialog);
-		}
-	});
-}
-
-function dialogPortalized(el) {
-	const tag = el.firstChild.nodeName.toLowerCase();
-	return Array.from(document.querySelectorAll(tag)).some(
-		el => !el.closest('cq-context')
-	);
 }

@@ -9,7 +9,7 @@
 		<h3><a routerLink="/technical-analysis">AdvancedChartComponent</a></h3>
 		<p>
 			Creates a chart with a full-featured user interface. AdvancedChartComponent is
-			the equivalent of ChartIQ's technical-analysis-chart.html advanced template.
+			the equivalent of ChartIQ's <i>technical-analysis-chart.html</i> advanced template.
 		</p>
 	</li>
 	<li>
@@ -19,12 +19,13 @@
 		</p>
 	</li>
 	<li>
-		<!-- 
-			Enable following line if Active Trader is available and uncomment Active Trader route in app.module.ts
+		<!--
+			Enable the following line if Active Trader is available, and uncomment the Active Trader route in app.module.ts.
 		-->
 		<!-- <h3><a routerLink="/active-trader">ActiveTraderComponent</a></h3> -->
-		<!-- Remove following line if Active Trader module is available -->
-		<h3 style="color: #999">ActiveTraderComponent (if module available enable link in route-list.component.html)</h3>
+		<!-- Remove the following lines if the Active Trader module is available. -->
+		<h3 style="color: #999; margin-bottom: 0">ActiveTraderComponent</h3>
+		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">(To enable this application, uncomment the Active Trader route in <i>app.module.ts</i> and enable the ActiveTraderComponent link in <i>route-list.component.html</i>.)</p>
 		<p>
 			Features the advanced chart component enhanced with the following plug-ins:
 		</p>
@@ -34,6 +35,18 @@
 				<li>Trade Book</li>
 				<li>Market Depth Chart</li>
 			</ul>
+	</li>
+	<li>
+		<!--
+			Enable the following line if Term Structure is available, and uncomment the Term Structure route in app.module.ts.
+		-->
+		<!-- <h3><a routerLink="/term-structure">TermStructureComponent</a></h3> -->
+		<!-- Remove the following lines if the Term Structure module is available. -->
+		<h3 style="color: #999; margin-bottom: 0">TermStructureComponent</h3>
+		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">(To enable this application, uncomment the Term Structure route in <i>app.module.ts</i> and enable the TermStructureComponent link in <i>route-list.component.html</i>.)</p>
+		<p>
+			Creates a term structure chart for working with non&ndash;time series data.
+		</p>
 	</li>
 	<li>
 		<h3><a routerLink="/custom-chart">CustomChartComponent</a></h3>
@@ -48,3 +61,4 @@
 			API in Angular.
 	</li>
 </ul>
+<br/>

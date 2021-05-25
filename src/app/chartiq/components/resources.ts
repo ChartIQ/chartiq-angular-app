@@ -18,7 +18,7 @@ import 'chartiq/examples/translations/translationSample';
 import 'chartiq/js/componentUI';
 import 'chartiq/js/components';
 
-// Event Markers 
+// Event Markers
 import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
@@ -30,14 +30,14 @@ import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
 
-import getConfig from 'chartiq/js/defaultConfiguration'; 
+import getConfig from 'chartiq/js/defaultConfiguration';
 
 // Plugins
 
-// Crypto, L2 Heat Map, Market Depth, 
+// Crypto, L2 Heat Map, Market Depth,
 // import 'chartiq/plugins/activetrader/cryptoiq';
 
-// ScriptIQ 
+// ScriptIQ
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
 // Trading Central: Technical Insights
@@ -60,11 +60,59 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
-const config = getConfig({ 
-	quoteFeed,
-	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-	markerSample: marker.MarkersSample,
-	scrollStyle: PerfectScrollbar,
-});
+function getDefaultConfig () {
+	return getConfig({
+		quoteFeed,
+		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+		markerSample: marker.MarkersSample,
+		scrollStyle: PerfectScrollbar,
+	});
+}
 
-export { CIQ, config };
+// Creates a complete customised configuration object
+function getCustomConfig({
+	chartId,
+	symbol,
+	restore,
+	onChartReady
+}: {
+	chartId?: string
+	symbol?: string | { symbol: string; name?: string; exchDisp?: string }
+	restore?: boolean
+	onChartReady?: Function
+} = {}) {
+	const config = getDefaultConfig()
+
+	// Update chart configuration by modifying default configuration
+	config.chartId = chartId || '_advanced-chart'
+	config.initialSymbol = symbol  || symbol === "" ? symbol : {
+		symbol: 'AAPL',
+		name: 'Apple Inc',
+		exchDisp: 'NASDAQ'
+	}
+	if (typeof restore === 'boolean') config.restore = restore
+
+	if (onChartReady) config.onChartReady = onChartReady
+
+	// Select only plugin configurations that needs to be active for this chart
+	const {
+		marketDepth,
+		tfc,
+		timeSpanEventPanel,
+		visualEarnings
+	} = config.plugins
+	config.plugins = {
+		// marketDepth,
+		// tfc,
+		// timeSpanEventPanel,
+		// visualEarnings
+	}
+
+	// Enable / disable addOns
+	// config.enabledAddOns.tooltip = false;
+	// config.enabledAddOns.continuousZoom = true;
+
+	return config
+}
+
+export { CIQ, getCustomConfig };

@@ -62,3 +62,6 @@ yarn.lock
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# vim edits
+*~

@@ -1,6 +1,3 @@
-# Customer library files
-src/chartiq_library
-
 # library in npm tarball format
 # chartiq-*.tgz
 
@@ -65,3 +62,10 @@ Thumbs.db
 
 # vim edits
 *~
+
+#Ignore stx folder
+stx
+
+#Ignore allure reports
+allure-report
+allure-results

@@ -4,16 +4,16 @@
 
 		<!-- enables the more button when in break-sm mode -->
 		<div class="sidenav-toggle ciq-toggles">
-			<cq-toggle 
-				class="ciq-sidenav" 
-				cq-member="sidenav" 
+			<cq-toggle
+				class="ciq-sidenav"
+				cq-member="sidenav"
 				cq-toggles="sidenavOn,sidenavOff"
 				cq-toggle-classes="active,"
 				keyboard-navigation="false"><span></span>
 				<cq-tooltip>More</cq-tooltip>
 			</cq-toggle>
 		</div>
-		
+
 		<cq-menu class="ciq-search">
 			<cq-lookup cq-keystroke-claim cq-uppercase></cq-lookup>
 		</cq-menu>
@@ -23,13 +23,13 @@
 			<div class="icon-toggles ciq-toggles">
 				<cq-toggle class="ciq-draw" cq-member="drawing"><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
 				<cq-info-toggle-dropdown>
-					<cq-toggle 
-						class="ciq-CH" 
+					<cq-toggle
+						class="ciq-CH"
 						cq-member="crosshair">
 						<span></span>
 						<cq-tooltip>Crosshair (Alt + \)</cq-tooltip>
 					</cq-toggle>
-	
+
 					<cq-menu class="ciq-menu toggle-options collapse">
 						<span></span>
 						<cq-menu-dropdown>
@@ -38,7 +38,7 @@
 						</cq-menu-dropdown>
 					</cq-menu>
 				</cq-info-toggle-dropdown>
-	
+
 				<cq-info-toggle-dropdown>
 					<cq-toggle
 						class="ciq-HU"
@@ -46,7 +46,7 @@
 						<span></span>
 						<cq-tooltip>Info</cq-tooltip>
 					</cq-toggle>
-	
+
 					<cq-menu class="ciq-menu toggle-options collapse tooltip-ui">
 						<span></span>
 						<cq-menu-dropdown>
@@ -55,7 +55,7 @@
 						</cq-menu-dropdown>
 					</cq-menu>
 				</cq-info-toggle-dropdown>
-	
+
 				<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
 			</div>
 		</cq-side-nav>
@@ -162,6 +162,11 @@
 							<cq-menu-container cq-name="menuYAxisPreferences"></cq-menu-container>
 							<cq-separator></cq-separator>
 						</cq-menu-dropdown-section>
+						<cq-menu-dropdown-section class="chart-addons">
+							<cq-heading>Additional Features</cq-heading>
+							<cq-menu-container cq-name="menuAddOns"></cq-menu-container>
+							<cq-separator></cq-separator>
+						</cq-menu-dropdown-section>
 						<cq-menu-dropdown-section class="chart-theme">
 							<cq-heading>Themes</cq-heading>
 							<cq-themes></cq-themes>
@@ -171,11 +176,6 @@
 							<cq-heading>Locale</cq-heading>
 							<cq-item><cq-clickable cq-selector="cq-timezone-dialog" cq-method="open">Change Timezone</cq-clickable></cq-item>
 							<cq-item stxsetget="Layout.Language()"><cq-flag></cq-flag><cq-language-name>Change Language</cq-language-name></cq-item>
-						</cq-menu-dropdown-section>
-						<cq-menu-dropdown-section class="shortcuts-ui">
-							<cq-separator></cq-separator>
-							<cq-heading>Shortcuts</cq-heading>
-							<cq-item stxtap="Layout.showShortcuts(true)">Shortcuts / Hotkeys</cq-item>
 						</cq-menu-dropdown-section>
 					</cq-menu-dropdown>
 				</cq-menu>
@@ -198,9 +198,9 @@
 	<cq-analystviews class="analystviews-ui" token="eZOrIVNU3KR1f0cf6PTUYg==" partner="1000" disabled></cq-analystviews>
 
 	<!-- custom tag for technicalinsights only works when plugin is loaded -->
-	<cq-technicalinsights uid="" lang="en" disabled></cq-technicalinsights> 
+	<cq-technicalinsights uid="" lang="en" disabled></cq-technicalinsights>
 
-	
+
 	<div class="ciq-chart-area">
 		<div class="ciq-chart">
 

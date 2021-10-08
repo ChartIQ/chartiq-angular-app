@@ -4,16 +4,16 @@
 
 		<!-- enables the more button when in break-sm mode -->
 		<div class="sidenav-toggle ciq-toggles">
-			<cq-toggle 
-				class="ciq-sidenav" 
-				cq-member="sidenav" 
+			<cq-toggle
+				class="ciq-sidenav"
+				cq-member="sidenav"
 				cq-toggles="sidenavOn,sidenavOff"
 				cq-toggle-classes="active,"
 				keyboard-navigation="false"><span></span>
 				<cq-tooltip>More</cq-tooltip>
 			</cq-toggle>
 		</div>
-		
+
 		<cq-menu class="ciq-search">
 			<cq-lookup cq-keystroke-claim cq-uppercase></cq-lookup>
 		</cq-menu>
@@ -23,13 +23,13 @@
 			<div class="icon-toggles ciq-toggles">
 				<cq-toggle class="ciq-draw" cq-member="drawing"><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
 				<cq-info-toggle-dropdown>
-					<cq-toggle 
-						class="ciq-CH" 
+					<cq-toggle
+						class="ciq-CH"
 						cq-member="crosshair">
 						<span></span>
 						<cq-tooltip>Crosshair (Alt + \)</cq-tooltip>
 					</cq-toggle>
-	
+
 					<cq-menu class="ciq-menu toggle-options collapse">
 						<span></span>
 						<cq-menu-dropdown>
@@ -38,7 +38,7 @@
 						</cq-menu-dropdown>
 					</cq-menu>
 				</cq-info-toggle-dropdown>
-	
+
 				<cq-info-toggle-dropdown>
 					<cq-toggle
 						class="ciq-HU"
@@ -46,7 +46,7 @@
 						<span></span>
 						<cq-tooltip>Info</cq-tooltip>
 					</cq-toggle>
-	
+
 					<cq-menu class="ciq-menu toggle-options collapse tooltip-ui">
 						<span></span>
 						<cq-menu-dropdown>
@@ -55,7 +55,7 @@
 						</cq-menu-dropdown>
 					</cq-menu>
 				</cq-info-toggle-dropdown>
-	
+
 				<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
 			</div>
 		</cq-side-nav>
@@ -160,6 +160,11 @@
 							<cq-menu-container cq-name="menuYAxisPreferences"></cq-menu-container>
 							<cq-separator></cq-separator>
 						</cq-menu-dropdown-section>
+						<cq-menu-dropdown-section class="chart-addons">
+							<cq-heading>Additional Features</cq-heading>
+							<cq-menu-container cq-name="menuAddOns"></cq-menu-container>
+							<cq-separator></cq-separator>
+						</cq-menu-dropdown-section>
 						<cq-menu-dropdown-section class="chart-theme">
 							<cq-heading>Themes</cq-heading>
 							<cq-themes></cq-themes>
@@ -169,11 +174,6 @@
 							<cq-heading>Locale</cq-heading>
 							<cq-item><cq-clickable cq-selector="cq-timezone-dialog" cq-method="open">Change Timezone</cq-clickable></cq-item>
 							<cq-item stxsetget="Layout.Language()"><cq-flag></cq-flag><cq-language-name>Change Language</cq-language-name></cq-item>
-						</cq-menu-dropdown-section>
-						<cq-menu-dropdown-section class="shortcuts-ui">
-							<cq-separator></cq-separator>
-							<cq-heading>Shortcuts</cq-heading>
-							<cq-item stxtap="Layout.showShortcuts(true)">Shortcuts / Hotkeys</cq-item>
 						</cq-menu-dropdown-section>
 					</cq-menu-dropdown>
 				</cq-menu>
@@ -247,7 +247,7 @@
 						</cq-orderbook>
 					</div>
 				</div>
-			
+
 				<div id="mainChartGroup" packager-append-child="div.ciq-chart-area div.ciq-chart">
 					<div class="ciq-chart">
 
@@ -259,14 +259,14 @@
 								<cq-drawing-settings class="palette-settings" docked="true" hide="true" orientation="horizontal" min-height="40" cq-drawing-edit="none"></cq-drawing-settings>
 							</div>
 						</cq-palette-dock>
-			
+
 						<div #chartContainer class="chartContainer">
-			
+
 							<cq-chart-title cq-marker cq-browser-tab></cq-chart-title>
-			
+
 							<cq-comparison-lookup></cq-comparison-lookup>
 							<cq-chart-legend></cq-chart-legend>
-			
+
 						</div>
 					</div>
 				</div>
@@ -289,7 +289,7 @@
 		<cq-dialog>
 			<cq-drawing-context></cq-drawing-context>
 		</cq-dialog>
-		
+
 		<cq-dialog>
 			<cq-study-context></cq-study-context>
 		</cq-dialog>

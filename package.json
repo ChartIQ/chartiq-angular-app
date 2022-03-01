@@ -1,10 +1,11 @@
 {
   "name": "chartiq-angular-app",
-  "version": "8.4.0",
+  "version": "8.6.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration development",
+    "build:prod": "ng build --prod --extract-css --resources-output-path resources ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,7 +25,6 @@
     "@angular/platform-browser-dynamic": "~10.2.5",
     "@angular/router": "~10.2.5",
     "@open-wc/webpack-import-meta-loader": "^0.4.7",
-    "chartiq": "file:chartiq-8.4.0.tgz",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

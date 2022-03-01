@@ -86,6 +86,9 @@ function getCustomConfig({
 			}
 	];
 
+	const { crossSection } = config.plugins;
+  config.plugins = { crossSection };
+
 	config.plugins.crossSection.sortFunction = (l, r) => {
 		let weight = ["DY", "WK", "MO", "YR", "ST", "MT", "LT"];
 		let l1 = l.split(" "),

@@ -23,7 +23,7 @@ import 'chartiq/examples/markers/videoSample';
 
 import "chartiq/js/extras/svgcharts/piechart.js";
 
-// import 'chartiq/examples/help/helpContent.js'
+// import 'chartiq/examples/help/helpContent.js';
 
 import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 

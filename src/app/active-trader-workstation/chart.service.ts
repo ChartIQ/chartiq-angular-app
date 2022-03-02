@@ -39,10 +39,13 @@ export class ChartService {
 	}
 
 	destroyChart() {
-		if (this.stx) {
-			this.stx.destroy();
-			this.stx.draw = () => {};
-		}
+		const { stx } = this;
+		if (!stx) return;
+
+		stx.destroy();
+		stx.draw = () => {};
+		const { moneyFlowChart } = stx;
+		if (moneyFlowChart) moneyFlowChart.destroy();
 	}
 
 	createChartAndUI({ container, config }) {

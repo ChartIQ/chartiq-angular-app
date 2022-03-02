@@ -21,7 +21,7 @@
 		<!-- any entry in this div will be shown in the side navigation bar in break-sm mode -->
 		<cq-side-nav cq-on="sidenavOn">
 			<div class="icon-toggles ciq-toggles">
-				<cq-toggle class="ciq-draw" cq-member="drawing"><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
+				<cq-toggle class="ciq-draw" cq-member="drawing"><cq-help help-id="drawing_tools_toggle"></cq-help><span></span><cq-tooltip>Draw</cq-tooltip></cq-toggle>
 				<cq-info-toggle-dropdown>
 					<cq-toggle
 						class="ciq-CH"
@@ -63,6 +63,24 @@
 		<div class="ciq-menu-section">
 
 			<div class="ciq-dropdowns">
+				<cq-menu class="ciq-menu ciq-display collapse">
+					<cq-clickable cq-tooltip-activator stxbind="Layout.chartType" ciq-no-icon-text="Display">
+							<span ciq-menu-icon="true"></span>
+							<cq-tooltip></cq-tooltip>
+					</cq-clickable>
+					<cq-menu-dropdown>
+						<cq-menu-dropdown-section class="chart-types">
+							<cq-heading>Chart Types</cq-heading>
+							<cq-menu-container cq-name="menuChartStyle"></cq-menu-container>
+						</cq-menu-dropdown-section>
+						<cq-menu-dropdown-section class="chart-aggregations">
+							<cq-separator></cq-separator>
+							<cq-heading>Aggregated Types</cq-heading>
+							<cq-menu-container cq-name="menuChartAggregates"></cq-menu-container>
+						</cq-menu-dropdown-section>
+					</cq-menu-dropdown>
+				</cq-menu>
+				
 				<cq-menu class="ciq-menu ciq-period">
 					<span><cq-clickable stxbind="Layout.periodicity">1D</cq-clickable></span>
 					<cq-menu-dropdown>
@@ -76,19 +94,6 @@
 						<cq-views></cq-views>
 					</cq-menu-dropdown>
 				</cq-menu>
-
-				<cq-menu class="ciq-menu ciq-display collapse">
-					<span>Display</span>
-				<cq-menu-dropdown>
-					<cq-menu-dropdown-section class="chart-types">
-						<cq-heading>Chart Style</cq-heading>
-						<cq-menu-container cq-name="menuChartStyle"></cq-menu-container>
-					</cq-menu-dropdown-section>
-					<cq-menu-dropdown-section class="chart-aggregations">
-						<cq-menu-container cq-name="menuChartAggregates"></cq-menu-container>
-					</cq-menu-dropdown-section>
-				</cq-menu-dropdown>
-			</cq-menu>
 
 				<cq-menu class="ciq-menu ciq-studies collapse" cq-focus="input">
 					<span>Studies</span>
@@ -282,6 +287,7 @@
 	<div class="ciq-footer full-screen-hide">
 		<cq-share-button></cq-share-button>
 		<div class="shortcuts-ui ciq-shortcut-button" stxtap="Layout.showShortcuts()" title="Toggle shortcut legend"></div>
+		<div class="help-ui ciq-help-button" stxtap="Layout.toggleHelp()" title="Toggle Interactive Help"></div>
 		<cq-show-range></cq-show-range>
 	</div>
 

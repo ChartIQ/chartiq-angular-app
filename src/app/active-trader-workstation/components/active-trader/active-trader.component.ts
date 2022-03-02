@@ -51,6 +51,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 
 		config.addOns.tableView.coverContainer = "#mainChartGroup .chartContainer";
 
+
 		// callback when chart is initialized and intial data available
 		config.onChartReady = (stx) => { /* stx is the chart engine */ };
 

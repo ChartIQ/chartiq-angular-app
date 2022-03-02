@@ -21,7 +21,7 @@ import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
 
-// import 'chartiq/examples/help/helpContent.js'
+// import 'chartiq/examples/help/helpContent.js';
 
 import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
@@ -39,6 +39,10 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 
 // ScriptIQ 
 // import 'chartiq/plugins/scriptiq/scriptiq';
+
+// SignalIQ
+import "chartiq/plugins/signaliq/signaliqDialog";
+import "chartiq/plugins/signaliq/signaliq-marker";
 
 // Trading Central: Analyst Views
 // import 'chartiq/plugins/analystviews/components';

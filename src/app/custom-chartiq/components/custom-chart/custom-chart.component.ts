@@ -40,6 +40,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
 		// Enable plugins
 		const { 
 			marketDepth,
+			signalIQ,
 			tfc,
 			timeSpanEventPanel,
 			visualEarnings
@@ -47,6 +48,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
 		// Select only plugin configurations that needs to be active for this chart
 		config.plugins = { 
 			// marketDepth,
+			signalIQ,
 			// tfc,
 			// timeSpanEventPanel,
 			// visualEarnings

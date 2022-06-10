@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
-// defines resources for use in ChartService providing a way to configurate service 
+// defines resources for use in ChartService providing a way to configurate service
 import { CIQ, getDefaultConfig } from './resources';
 import { ChartService } from '../../chart.service';
 
@@ -49,7 +49,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 			item.label !== 'Market Depth' && item.label !== 'Extended Hours'
 		));
 
-		config.addOns.tableView.coverContainer = "#mainChartGroup .chartContainer";
+		config.addOns.tableView.coverContainer = ".ciq-chart-area";
 
 
 		// callback when chart is initialized and intial data available
@@ -67,7 +67,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 		}
 
 		// Request TFC channel open
-		channelWrite(config.channels.tfc, true, uiContext.stx);		
+		channelWrite(config.channels.tfc, true, uiContext.stx);
 	}
 
 	ngOnDestroy() {

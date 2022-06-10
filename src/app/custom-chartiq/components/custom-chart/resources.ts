@@ -2,8 +2,8 @@
 
 import { CIQ } from 'chartiq/js/chartiq';
 import 'chartiq/js/advanced';
-
 import 'chartiq/js/addOns';
+import 'chartiq/js/components';
 
 // Symbol mapping to market definition
 import 'chartiq/examples/markets/marketDefinitionsSample';
@@ -13,10 +13,8 @@ import 'chartiq/examples/feeds/symbolLookupChartIQ';
 
 import 'chartiq/examples/translations/translationSample';
 
-import 'chartiq/js/componentUI';
-import 'chartiq/js/components';
 
-// Event Markers 
+// Event Markers
 import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
@@ -30,19 +28,20 @@ import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
 
-import getConfig from 'chartiq/js/defaultConfiguration'; 
+import getConfig from 'chartiq/js/defaultConfiguration';
 
 // Plugins
 
-// Crypto, L2 Heat Map, Market Depth, 
+// Crypto, L2 Heat Map, Market Depth,
 // import 'chartiq/plugins/activetrader/cryptoiq';
 
-// ScriptIQ 
+// ScriptIQ
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
 // SignalIQ
 import "chartiq/plugins/signaliq/signaliqDialog";
 import "chartiq/plugins/signaliq/signaliq-marker";
+import "chartiq/plugins/signaliq/signaliq-paintbar";
 
 // Trading Central: Analyst Views
 // import 'chartiq/plugins/analystviews/components';
@@ -68,14 +67,15 @@ function getDefaultConfig () {
 	return getConfig({
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+		markerFeed: marker.MarkersSample,
 		scrollStyle: PerfectScrollbar,
 	});
 }
 
-const config = getConfig({ 
+const config = getConfig({
 	quoteFeed,
 	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-	markerSample: marker.MarkersSample,
+	markerFeed: marker.MarkersSample,
 	scrollStyle: PerfectScrollbar,
 });
 

@@ -18,32 +18,32 @@ import { RouteListComponent } from './route-list/route-list.component';
 	imports: [
 		BrowserModule,
 		RouterModule.forRoot([
-			{ path: '', component: RouteListComponent },
-			{ path: 'list', component: RouteListComponent },
-			{ path: 'hello-world', component: HelloWorldComponent },
-			{
-				path: '',
-				loadChildren: () => import("./chartiq/chartiq.module")
-					.then(m => m.ChartiqModule)
-			},
-			// Uncomment following lines if Active Trader module is available
-			// {
-			// 	path: 'active-trader',
-			// 	loadChildren: () => import("./active-trader-workstation/active-trader-workstation.module")
-			// 	.then(m => m.CryptoIQWorkstationModule)
-			// },
-			//  Uncomment following lines if Term Structure module is available
-			// {
-			// 	path: '',
-			// 	loadChildren: () => import('./term-structure/term-structure.module')
-			// 		.then(m => m.TermStructureModule)
-			// },
-			{
-				path: 'custom-chart',
-				loadChildren: () => import("./custom-chartiq/custom-chartiq.module")
-					.then(m => m.ChartiqModule)
-			},
-    ])],
+    { path: '', component: RouteListComponent },
+    { path: 'list', component: RouteListComponent },
+    { path: 'hello-world', component: HelloWorldComponent },
+    {
+        path: '',
+        loadChildren: () => import("./chartiq/chartiq.module")
+            .then(m => m.ChartiqModule)
+    },
+    // Uncomment following lines if Active Trader module is available
+    // {
+    // 	path: 'active-trader',
+    // 	loadChildren: () => import("./active-trader-workstation/active-trader-workstation.module")
+    // 	.then(m => m.CryptoIQWorkstationModule)
+    // },
+    //  Uncomment following lines if Term Structure module is available
+    // {
+    // 	path: '',
+    // 	loadChildren: () => import('./term-structure/term-structure.module')
+    // 		.then(m => m.TermStructureModule)
+    // },
+    {
+        path: 'custom-chart',
+        loadChildren: () => import("./custom-chartiq/custom-chartiq.module")
+            .then(m => m.ChartiqModule)
+    },
+], { relativeLinkResolution: 'legacy' })],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	bootstrap: [AppComponent],
 })

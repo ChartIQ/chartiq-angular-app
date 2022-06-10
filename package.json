@@ -1,66 +1,73 @@
 {
-  "name": "chartiq-angular-app",
-  "version": "8.6.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --configuration development",
-    "build:prod": "ng build --prod --extract-css --resources-output-path resources ",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=10.13.0"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "@angular/animations": "~10.2.5",
-    "@angular/common": "~10.2.5",
-    "@angular/compiler": "~10.2.5",
-    "@angular/core": "~10.2.5",
-    "@angular/forms": "~10.2.5",
-    "@angular/platform-browser": "~10.2.5",
-    "@angular/platform-browser-dynamic": "~10.2.5",
-    "@angular/router": "~10.2.5",
-    "@open-wc/webpack-import-meta-loader": "^0.4.7",
-    "rxjs": "~6.6.3",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
-  },
-  "devDependencies": {
-    "@angular-builders/custom-webpack": "^8.2.0",
-    "@angular-devkit/build-angular": "~0.1002.3",
-    "@angular/cli": "~10.2.3",
-    "@angular/compiler-cli": "~10.2.5",
-    "@angular/language-service": "~10.2.5",
-    "@types/jasmine": "~3.3.8",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
-    "codelyzer": "^5.1.2",
-    "jasmine-core": "~3.5.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.0.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.0.8"
-  },
-  "keywords": [
-    "Angular",
-    "ChartIQ"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ChartIQ/chartiq-angular-app.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ChartIQ/chartiq-angular-app/issues"
-  },
-  "homepage": "https://github.com/ChartIQ/chartiq-angular-app/blob/master/README.md"
+	"name": "chartiq-angular-app",
+	"version": "8.7.0",
+	"scripts": {
+		"ng": "ng",
+		"start": "ng serve",
+		"build": "ng build --configuration development",
+		"build:prod": "ng build --configuration production --resources-output-path resources ",
+		"test": "ng test",
+		"lint": "ng lint",
+		"e2e": "ng e2e"
+	},
+	"engineStrict": true,
+	"engines": {
+		"node": ">=10.13.0"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"@angular/animations": "~13.3.9",
+		"@angular/common": "~13.3.9",
+		"@angular/compiler": "~13.3.9",
+		"@angular/core": "~13.3.9",
+		"@angular/forms": "~13.3.9",
+		"@angular/platform-browser": "~13.3.9",
+		"@angular/platform-browser-dynamic": "~13.3.9",
+		"@angular/router": "~13.3.9",
+		"rxjs": "~6.6.3",
+		"tslib": "^2.0.0",
+		"zone.js": "~0.11.4"
+	},
+	"devDependencies": {
+		"@angular-builders/custom-webpack": "^13.1.0",
+		"@angular-devkit/build-angular": "~13.3.6",
+		"@angular-eslint/builder": "13.2.1",
+		"@angular-eslint/eslint-plugin": "13.2.1",
+		"@angular-eslint/eslint-plugin-template": "13.2.1",
+		"@angular-eslint/schematics": "13.2.1",
+		"@angular-eslint/template-parser": "13.2.1",
+		"@angular/cli": "~13.3.6",
+		"@angular/compiler-cli": "~13.3.9",
+		"@angular/language-service": "~13.3.9",
+		"@types/jasmine": "~3.6.0",
+		"@types/jasminewd2": "~2.0.3",
+		"@types/node": "^12.11.1",
+		"@typescript-eslint/eslint-plugin": "5.17.0",
+		"@typescript-eslint/parser": "5.17.0",
+		"codelyzer": "^6.0.0",
+		"eslint": "^8.12.0",
+		"jasmine-core": "~3.6.0",
+		"jasmine-spec-reporter": "~5.0.0",
+		"karma": "~6.3.19",
+		"karma-chrome-launcher": "~3.1.0",
+		"karma-coverage-istanbul-reporter": "~3.0.2",
+		"karma-jasmine": "~4.0.0",
+		"karma-jasmine-html-reporter": "^1.5.0",
+		"protractor": "~7.0.0",
+		"ts-node": "~7.0.0",
+		"tslint": "~6.1.0",
+		"typescript": "~4.6.4"
+	},
+	"keywords": [
+		"Angular",
+		"ChartIQ"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ChartIQ/chartiq-angular-app.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ChartIQ/chartiq-angular-app/issues"
+	},
+	"homepage": "https://github.com/ChartIQ/chartiq-angular-app/blob/master/README.md"
 }

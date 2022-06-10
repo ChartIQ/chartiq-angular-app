@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiChartComponent } from './multi-chart.component';
 
@@ -6,10 +6,11 @@ describe('MultiChartComponent', () => {
   let component: MultiChartComponent;
   let fixture: ComponentFixture<MultiChartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultiChartComponent ]
-    })
+    declarations: [MultiChartComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

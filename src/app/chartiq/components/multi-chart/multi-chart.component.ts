@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-multi-chart',
   templateUrl: './multi-chart.component.html',
   styleUrls: ['./multi-chart.component.scss']
 })
-export class MultiChartComponent implements OnInit {
+export class MultiChartComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

@@ -28,7 +28,9 @@
 <div class="chartWrapper">
 	<cq-context #contextContainer [ngClass]="chartService.breakpoint$ | async">
 
-		<div class="ciq-nav full-screen-hide">
+		<cq-chart-instructions role="contentinfo"></cq-chart-instructions>
+
+		<div class="ciq-nav full-screen-hide" role="navigation">
 
 			<!-- enables the more button when in break-sm mode -->
 			<div class="sidenav-toggle ciq-toggles">
@@ -44,7 +46,13 @@
 
 			<cq-menu class="ciq-search">
 				<cq-angular-recent-symbols>
-					<cq-lookup cq-keystroke-claim cq-uppercase></cq-lookup>
+					<cq-lookup cq-keystroke-claim cq-uppercase role="search"
+						aria-labelledby="mainSymbol"
+						label-name="mainSymbol"
+						label-text="Main Symbol"
+						class="hide-label"
+					>
+					</cq-lookup>
 				</cq-angular-recent-symbols>
 			</cq-menu>
 
@@ -86,7 +94,10 @@
 						</cq-menu>
 					</cq-info-toggle-dropdown>
 
-					<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
+					<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView" role="button" aria-pressed="false">
+						<span></span>
+						<cq-tooltip>Table View</cq-tooltip>
+					</cq-toggle>
 				</div>
 			</cq-side-nav>
 
@@ -110,7 +121,7 @@
 							</cq-menu-dropdown-section>
 						</cq-menu-dropdown>
 					</cq-menu>
-					
+
 					<cq-menu class="ciq-menu ciq-period">
 						<span><cq-clickable stxbind="Layout.periodicity">1D</cq-clickable></span>
 						<cq-menu-dropdown>
@@ -176,22 +187,21 @@
 									<cq-separator></cq-separator>
 								</cq-study-legend>
 							</div>
-							<cq-heading>Chart Events</cq-heading>
-							<cq-item stxtap="Markers.showMarkers('square')">Simple Square<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-item stxtap="Markers.showMarkers('circle')">Simple Circle<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-item stxtap="Markers.showMarkers('callout')">Callouts<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-item class="ta_markers-ui" stxtap="Markers.showMarkers('trade')">Trade<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-item class="video_markers-ui" stxtap="Markers.showMarkers('video')">Video<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-item stxtap="Markers.showMarkers('abstract')">Abstract<span class="ciq-radio"><span></span></span>
-							</cq-item>
-							<cq-separator></cq-separator>
-							<cq-item stxtap="Markers.showMarkers()" class="ciq-active">None<span class="ciq-radio"><span></span></span>
-							</cq-item>
+							<div class="markers-ui">
+								<cq-heading>Chart Events</cq-heading>
+								<cq-item stxtap="Markers.showMarkers('square')" cq-no-close>Simple Square<span class="ciq-switch"><span></span></span>
+								</cq-item>
+								<cq-item stxtap="Markers.showMarkers('circle')" cq-no-close>Simple Circle<span class="ciq-switch"><span></span></span>
+								</cq-item>
+								<cq-item stxtap="Markers.showMarkers('callout')" cq-no-close>Callouts<span class="ciq-switch"><span></span></span>
+								</cq-item>
+								<cq-item class="ta_markers-ui" stxtap="Markers.showMarkers('trade')" cq-no-close>Trade<span class="ciq-switch"><span></span></span>
+								</cq-item>
+								<cq-item class="video_markers-ui" stxtap="Markers.showMarkers('video')" cq-no-close>Video<span class="ciq-switch"><span></span></span>
+								</cq-item>
+								<cq-item stxtap="Markers.showMarkers('helicopter')" cq-no-close>Abstract<span class="ciq-switch"><span></span></span>
+								</cq-item>
+							</div>
 							<div class="timespanevent-ui">
 								<cq-separator></cq-separator>
 								<cq-heading>Panel Events</cq-heading>
@@ -259,7 +269,7 @@
 		<cq-technicalinsights uid="" lang="en" disabled></cq-technicalinsights>
 
 		<cq-angular-recent-symbols count="2">
-			<div class="ciq-chart-area">
+			<div class="ciq-chart-area" role="main">
 				<div class="ciq-chart">
 
 					<cq-message-toaster defaultDisplayTime="10" defaultTransition="slide" defaultPosition="top"></cq-message-toaster>
@@ -314,7 +324,7 @@
 
 		<cq-side-panel></cq-side-panel>
 
-		<cq-angular-shortcut-dialog *ngIf="(chartService.dialog$ | async) == 'drawingTools'"></cq-angular-shortcut-dialog>
+		<cq-angular-shortcut-dialog *ngIf="(chartService.dialog$ | async) === 'drawingTools'"></cq-angular-shortcut-dialog>
 
 	</cq-context>
 </div>

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ActiveTraderComponent } from './active-trader.component';
 
@@ -6,10 +6,11 @@ describe('ActiveTraderComponent', () => {
   let component: ActiveTraderComponent;
   let fixture: ComponentFixture<ActiveTraderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActiveTraderComponent ]
-    })
+    declarations: [ActiveTraderComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

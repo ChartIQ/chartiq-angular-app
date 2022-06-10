@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CustomChartComponent } from './custom-chart.component';
 
@@ -6,10 +6,11 @@ describe('CustomChartComponent', () => {
   let component: CustomChartComponent;
   let fixture: ComponentFixture<CustomChartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomChartComponent ]
-    })
+    declarations: [CustomChartComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

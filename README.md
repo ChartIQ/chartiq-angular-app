@@ -7,6 +7,7 @@
 - [Getting started](#getting-started)
 - [Customization](#customization)
 - [Enabling plug-ins](#enabling-plug\-ins)
+- [Customizing Webpack](#customizing-webpack)
 - [Questions and support](#questions-and-support)
 - [Contributing to this project](#contributing-to-this-project)
 
@@ -22,7 +23,7 @@ The ChartIQ Angular application is a toolkit of components that enable you to bu
 - `CustomChartComponent` &mdash; Integrates native Angular components with ChartIQ W3C-standard web components
 - `HelloWorldComponent` &mdash; Creates a basic chart with no user interface as a starting point for your Angular app
 
-The ChartIQ Angular application was built using the Angular 8.4 framework with [Angular CLI](https://cli.angular.io) support.
+The ChartIQ Angular application was built using the Angular 13 framework with [Angular CLI](https://cli.angular.io) support.
 
 **Note:**
 
@@ -32,7 +33,7 @@ The ChartIQ Angular application was built using the Angular 8.4 framework with [
 
 ## Requirements
 
-A copy of the ChartIQ library, version 8.6.0 or later.
+A copy of the ChartIQ library, version 8.7.0 or later.
 
 If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
@@ -139,6 +140,12 @@ and the following line in [chart.service.ts](./src/app/chartiq/chart.service.ts)
 ```js
 // CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
 ```
+
+## Customizing Webpack
+
+This project uses custom webpack builder to make sure that the all library features work and for the ease of customization (for information on Webpack customization follow the instructions in [@angular-builders/custom-webapck](https://www.npmjs.com/package/@angular-builders/custom-webpack)). The configuration can be found in _custom-webpack.config.js_ file. By default, it includes a loader to make sure all assets imported by the library are handled correctly.
+
+The ChartIQ library makes use of `import.meta` API. If you are using Webpack 4 in your project (Angular versions below 12) then you will need to use a plugin like the [Import Meta loader](https://www.npmjs.com/package/@open-wc/webpack-import-meta-loader). For specific instructions see the ChartIQ 8.4 Update log [here](https://documentation.chartiq.com/tutorial-Upgradelog_8.3.0-8.4.0.html).
 
 ## Questions and support
 

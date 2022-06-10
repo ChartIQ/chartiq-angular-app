@@ -1,6 +1,8 @@
 <cq-context #contextContainer [ngClass]="chartService.breakpoint$ | async">
 
-	<div class="ciq-nav full-screen-hide">
+	<cq-chart-instructions role="contentinfo"></cq-chart-instructions>
+
+	<div class="ciq-nav full-screen-hide" role="navigation">
 
 		<!-- enables the more button when in break-sm mode -->
 		<div class="sidenav-toggle ciq-toggles">
@@ -15,7 +17,13 @@
 		</div>
 
 		<cq-menu class="ciq-search">
-			<cq-lookup cq-keystroke-claim cq-uppercase></cq-lookup>
+			<cq-lookup cq-keystroke-claim cq-uppercase role="search"
+				aria-labelledby="mainSymbol"
+				label-name="mainSymbol"
+				label-text="Main Symbol"
+				class="hide-label"
+			>
+			</cq-lookup>
 		</cq-menu>
 
 		<!-- any entry in this div will be shown in the side navigation bar in break-sm mode -->
@@ -56,7 +64,10 @@
 					</cq-menu>
 				</cq-info-toggle-dropdown>
 
-				<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView"><span></span><cq-tooltip>Table View</cq-tooltip></cq-toggle>
+				<cq-toggle class="ciq-DT tableview-ui" cq-member="tableView" role="button" aria-pressed="false">
+					<span></span>
+					<cq-tooltip>Table View</cq-tooltip>
+				</cq-toggle>
 			</div>
 		</cq-side-nav>
 
@@ -128,20 +139,39 @@
 				<cq-menu class="ciq-menu stx-markers collapse">
 					<span>Events</span>
 					<cq-menu-dropdown>
-						<cq-heading>Chart Events</cq-heading>
-						<cq-item stxtap="Markers.showMarkers('square')">Simple Square<span class="ciq-radio"><span></span></span>
-						</cq-item>
-						<cq-item stxtap="Markers.showMarkers('circle')">Simple Circle<span class="ciq-radio"><span></span></span>
-						</cq-item>
-						<cq-item stxtap="Markers.showMarkers('callout')">Callouts<span class="ciq-radio"><span></span></span>
-						</cq-item>
-						<cq-item class="ta_markers-ui" stxtap="Markers.showMarkers('trade')">Trade<span class="ciq-radio"><span></span></span>
-						</cq-item>
-						<cq-item class="video_markers-ui" stxtap="Markers.showMarkers('video')">Video<span class="ciq-radio"><span></span></span>
-						</cq-item>
-						<cq-separator></cq-separator>
-						<cq-item stxtap="Markers.showMarkers()" class="ciq-active">None<span class="ciq-radio"><span></span></span>
-						</cq-item>
+						<div class="signaliq-ui">
+							<cq-heading>SignalIQ</cq-heading>
+							<cq-item><cq-clickable cq-selector="cq-signaliq-dialog" cq-method="open"><cq-plus></cq-plus> New Signal</cq-clickable></cq-item>
+							<cq-separator></cq-separator>
+							<cq-study-legend cq-signal-studies-only cq-no-close>
+								<cq-section-dynamic>
+									<cq-study-legend-content>
+										<template cq-study-legend>
+											<cq-item>
+												<cq-label class="click-to-edit"></cq-label>
+												<div class="ciq-icon ciq-close"></div>
+											</cq-item>
+										</template>
+									</cq-study-legend-content>
+								</cq-section-dynamic>
+								<cq-separator></cq-separator>
+							</cq-study-legend>
+						</div>
+						<div class="markers-ui">
+							<cq-heading>Chart Events</cq-heading>
+							<cq-item stxtap="Markers.showMarkers('square')" cq-no-close>Simple Square<span class="ciq-switch"><span></span></span>
+							</cq-item>
+							<cq-item stxtap="Markers.showMarkers('circle')" cq-no-close>Simple Circle<span class="ciq-switch"><span></span></span>
+							</cq-item>
+							<cq-item stxtap="Markers.showMarkers('callout')" cq-no-close>Callouts<span class="ciq-switch"><span></span></span>
+							</cq-item>
+							<cq-item class="ta_markers-ui" stxtap="Markers.showMarkers('trade')" cq-no-close>Trade<span class="ciq-switch"><span></span></span>
+							</cq-item>
+							<cq-item class="video_markers-ui" stxtap="Markers.showMarkers('video')" cq-no-close>Video<span class="ciq-switch"><span></span></span>
+							</cq-item>
+							<cq-item stxtap="Markers.showMarkers('helicopter')" cq-no-close>Abstract<span class="ciq-switch"><span></span></span>
+							</cq-item>
+						</div>
 						<div class="timespanevent-ui">
 							<cq-separator></cq-separator>
 							<cq-heading>Panel Events</cq-heading>
@@ -199,7 +229,7 @@
 	<!-- custom tag for analystviews only works when plugin is loaded -->
 	<cq-analystviews class="analystviews-ui" token="eZOrIVNU3KR1f0cf6PTUYg==" partner="1000" disabled></cq-analystviews>
 
-	<div class="ciq-chart-area">
+	<div class="ciq-chart-area" role="main">
 		<div chartarea>
 			<div id="flexContainer">
 				<div id="cryptoGroup1">
@@ -280,6 +310,10 @@
 		</div>
 
 	</div>
+
+	<!-- Markers/Events -->
+	<cq-abstract-marker cq-type="helicopter"></cq-abstract-marker>
+	<!-- End Marker/Events -->
 
 	<!-- Attribution component -->
 	<cq-attribution></cq-attribution>

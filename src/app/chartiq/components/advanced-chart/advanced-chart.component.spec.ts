@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdvancedChartComponent } from './advanced-chart.component';
 
@@ -6,10 +6,11 @@ describe('AdvancedChartComponent', () => {
   let component: AdvancedChartComponent;
   let fixture: ComponentFixture<AdvancedChartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdvancedChartComponent ]
-    })
+    declarations: [AdvancedChartComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

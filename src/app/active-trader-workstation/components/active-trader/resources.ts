@@ -1,8 +1,10 @@
 // Required imports from chartiq for advanced chart
 
 import { CIQ } from 'chartiq/js/chartiq';
+
 import 'chartiq/js/advanced';
 
+import 'chartiq/js/components';
 import 'chartiq/js/addOns';
 
 // Symbol mapping to market definition
@@ -12,9 +14,6 @@ import 'chartiq/examples/markets/marketSymbologySample';
 import 'chartiq/examples/feeds/symbolLookupChartIQ';
 
 import 'chartiq/examples/translations/translationSample';
-
-import 'chartiq/js/componentUI';
-import 'chartiq/js/components';
 
 // Event Markers 
 import marker from 'chartiq/examples/markers/markersSample.js';
@@ -42,6 +41,11 @@ import 'chartiq/plugins/activetrader/cryptoiq';
 // ScriptIQ 
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
+// SignalIQ
+// import "chartiq/plugins/signaliq/signaliqDialog";
+// import "chartiq/plugins/signaliq/signaliq-marker";
+// import "chartiq/plugins/signaliq/signaliq-paintbar";
+
 // TFC plugin
 import 'chartiq/plugins/tfc/tfc-loader';
 import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
@@ -66,7 +70,7 @@ function getDefaultConfig() {
 	const config = getConfig({ 
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-		markerSample: marker.MarkersSample,
+		markerFeed: marker.MarkersSample,
 		scrollStyle: PerfectScrollbar,
 	});
 
@@ -74,6 +78,7 @@ function getDefaultConfig() {
 		marketDepth,
 		tfc,
 		timeSpanEventPanel,
+		signalIQ,
 		visualEarnings
 	} = config.plugins;
 	// Select only plugin configurations that needs to be active for this chart
@@ -81,6 +86,7 @@ function getDefaultConfig() {
 		marketDepth,
 		tfc,
 		// timeSpanEventPanel,
+		// signalIQ,
 		// visualEarnings
 	};
 	

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShortcutDialogComponent } from './shortcut-dialog.component';
 
@@ -6,10 +6,11 @@ describe('ShortcutDialogComponent', () => {
   let component: ShortcutDialogComponent;
   let fixture: ComponentFixture<ShortcutDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShortcutDialogComponent ]
-    })
+    declarations: [ShortcutDialogComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

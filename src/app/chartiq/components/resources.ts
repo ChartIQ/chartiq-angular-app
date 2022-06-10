@@ -1,11 +1,10 @@
 // Required imports from chartiq for advanced chart
 
 import { CIQ } from 'chartiq/js/chartiq';
-import 'chartiq/js/advanced';
 
 import 'chartiq/js/advanced';
-
 import 'chartiq/js/addOns';
+import 'chartiq/js/components';
 
 // Symbol mapping to market definition
 import 'chartiq/examples/markets/marketDefinitionsSample';
@@ -14,9 +13,6 @@ import 'chartiq/examples/markets/marketSymbologySample';
 import 'chartiq/examples/feeds/symbolLookupChartIQ';
 
 import 'chartiq/examples/translations/translationSample';
-
-import 'chartiq/js/componentUI';
-import 'chartiq/js/components';
 
 // Event Markers
 import marker from 'chartiq/examples/markers/markersSample.js';
@@ -45,6 +41,7 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // SignalIQ
 import "chartiq/plugins/signaliq/signaliqDialog";
 import "chartiq/plugins/signaliq/signaliq-marker";
+import "chartiq/plugins/signaliq/signaliq-paintbar";
 
 // Trading Central: Technical Insights
 // import 'chartiq/plugins/technicalinsights/components'
@@ -70,7 +67,7 @@ function getDefaultConfig () {
 	return getConfig({
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-		markerSample: marker.MarkersSample,
+		markerFeed: marker.MarkersSample,
 		scrollStyle: PerfectScrollbar,
 	});
 }

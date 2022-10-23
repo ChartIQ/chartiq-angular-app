@@ -14,8 +14,7 @@ import {
 	imports: [
 		CommonModule,
 		RouterModule.forChild([
-			{ path: 'technical-analysis', component: AdvancedChartWrapperComponent },
-			{ path: 'multi-chart', component: MultiChartComponent }
+			{ path: 'technical-analysis', component: AdvancedChartWrapperComponent }
 		])
 	],
 	exports: [AdvancedChartComponent, AdvancedChartWrapperComponent, MultiChartComponent]

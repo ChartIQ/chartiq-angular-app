@@ -27,6 +27,7 @@ import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 // import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
+import EmojiPopover from "chartiq/js/thirdparty/emoji-popover.es.js";
 
 import getConfig from 'chartiq/js/defaultConfiguration';
 
@@ -42,6 +43,8 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 import "chartiq/plugins/signaliq/signaliqDialog";
 import "chartiq/plugins/signaliq/signaliq-marker";
 import "chartiq/plugins/signaliq/signaliq-paintbar";
+
+// import "chartiq/plugins/studybrowser";
 
 // Trading Central: Analyst Views
 // import 'chartiq/plugins/analystviews/components';
@@ -77,6 +80,7 @@ const config = getConfig({
 	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
 	markerFeed: marker.MarkersSample,
 	scrollStyle: PerfectScrollbar,
+	emojiPicker: EmojiPopover
 });
 
 export { CIQ, getDefaultConfig };

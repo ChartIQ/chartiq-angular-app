@@ -28,15 +28,15 @@ import { RouteListComponent } from './route-list/route-list.component';
     },
     // Uncomment following lines if Active Trader module is available
     // {
-    // 	path: 'active-trader',
-    // 	loadChildren: () => import("./active-trader-workstation/active-trader-workstation.module")
-    // 	.then(m => m.CryptoIQWorkstationModule)
+    //     path: 'active-trader',
+    //     loadChildren: () => import("./active-trader-workstation/active-trader-workstation.module")
+    //     .then(m => m.CryptoIQWorkstationModule)
     // },
     //  Uncomment following lines if Term Structure module is available
     // {
-    // 	path: '',
-    // 	loadChildren: () => import('./term-structure/term-structure.module')
-    // 		.then(m => m.TermStructureModule)
+    //     path: '',
+    //     loadChildren: () => import('./term-structure/term-structure.module')
+    //         .then(m => m.TermStructureModule)
     // },
     {
         path: 'custom-chart',

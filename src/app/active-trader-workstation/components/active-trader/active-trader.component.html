@@ -16,15 +16,22 @@
 			</cq-toggle>
 		</div>
 
-		<cq-menu class="ciq-search">
-			<cq-lookup cq-keystroke-claim cq-uppercase role="search"
-				aria-labelledby="mainSymbol"
-				label-name="mainSymbol"
-				label-text="Main Symbol"
-				class="hide-label"
-			>
-			</cq-lookup>
-		</cq-menu>
+		<cq-clickable role="button" class="symbol-search" cq-selector="cq-lookup-dialog" cq-method="open" delay="true">
+			<span class="ciq-lookup-icon"></span>
+			<cq-tooltip>Symbol Search</cq-tooltip>
+		</cq-clickable>
+
+		<cq-clickable
+			role="button"
+			class="symbol-search"
+			cq-selector="cq-lookup-dialog"
+			cq-method="open"
+			comparison="true"
+			delay="true"
+		>
+			<span class="ciq-comparison-icon"></span>
+			<cq-tooltip>Add Comparison</cq-tooltip>
+		</cq-clickable>
 
 		<!-- any entry in this div will be shown in the side navigation bar in break-sm mode -->
 		<cq-side-nav cq-on="sidenavOn">
@@ -91,7 +98,7 @@
 						</cq-menu-dropdown-section>
 					</cq-menu-dropdown>
 				</cq-menu>
-				
+
 				<cq-menu class="ciq-menu ciq-period">
 					<span><cq-clickable stxbind="Layout.periodicity">1D</cq-clickable></span>
 					<cq-menu-dropdown>
@@ -109,30 +116,7 @@
 				<cq-menu class="ciq-menu ciq-studies collapse" cq-focus="input">
 					<span>Studies</span>
 					<cq-menu-dropdown>
-						<cq-study-legend cq-no-close>
-							<cq-section-dynamic>
-								<cq-heading>Current Studies</cq-heading>
-								<cq-study-legend-content>
-									<template cq-study-legend>
-										<cq-item>
-											<cq-label class="click-to-edit"></cq-label>
-											<div class="ciq-icon ciq-close"></div>
-										</cq-item>
-									</template>
-								</cq-study-legend-content>
-								<cq-placeholder>
-									<div stxtap="Layout.clearStudies()" class="ciq-btn sm" keyboard-selectable="true">Clear All</div>
-								</cq-placeholder>
-							</cq-section-dynamic>
-						</cq-study-legend>
-						<div class="scriptiq-ui">
-							<cq-heading>ScriptIQ</cq-heading>
-								<cq-item><cq-clickable cq-selector="cq-scriptiq-editor" cq-method="open">New Script</cq-clickable></cq-item>
-								<cq-scriptiq-menu></cq-scriptiq-menu>
-							<cq-separator></cq-separator>
-						</div>
-						<cq-heading cq-filter cq-filter-min="-1">Studies</cq-heading>
-						<cq-studies></cq-studies>
+						<cq-study-menu-manager></cq-study-menu-manager>
 					</cq-menu-dropdown>
 				</cq-menu>
 
@@ -296,10 +280,18 @@
 						</cq-palette-dock>
 
 						<div #chartContainer class="chartContainer">
+							<!-- tooltip markup is required only if addon tooltip is used and customization is required -->
+							<table class="hu-tooltip">
+								<caption>Tooltip</caption>
+								<tbody>
+								<tr hu-tooltip-field="" class="hu-tooltip-sr-only"> <th>Field</th>                             <th>Value</th>                     </tr>
+								<tr hu-tooltip-field="DT">                          <td class="hu-tooltip-name">Date/Time</td> <td class="hu-tooltip-value"></td> </tr>
+								<tr hu-tooltip-field="Close">                       <td class="hu-tooltip-name"></td>          <td class="hu-tooltip-value"></td> </tr>
+								</tbody>
+							</table>
 
-							<cq-chart-title cq-marker cq-browser-tab></cq-chart-title>
+							<cq-chart-title cq-marker cq-browser-tab cq-activate-symbol-search-on-click></cq-chart-title>
 
-							<cq-comparison-lookup></cq-comparison-lookup>
 							<cq-chart-legend></cq-chart-legend>
 
 						</div>

@@ -75,12 +75,37 @@ function getDefaultConfig () {
 	});
 }
 
-const config = getConfig({
-	quoteFeed,
-	// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
-	markerFeed: marker.MarkersSample,
-	scrollStyle: PerfectScrollbar,
-	emojiPicker: EmojiPopover
-});
+function getCustomConfig() {
+	const config = getConfig({
+		quoteFeed,
+		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
+		markerFeed: marker.MarkersSample,
+		scrollStyle: PerfectScrollbar,
+		emojiPicker: EmojiPopover
+	});
+	
+	// Select only plugin configurations that needs to be active for this chart
+	const {
+		marketDepth,
+		signalIQ,
+		tfc,
+		technicalInsights,
+		timeSpanEventPanel,
+		visualEarnings,
+	} = config.plugins;
 
-export { CIQ, getDefaultConfig };
+	config.plugins = {
+		// marketDepth,
+		signalIQ,
+		// tfc,
+		// technicalInsights: {
+		// 	...technicalInsights,
+		// 	uid: ""
+		// },
+		// timeSpanEventPanel,
+		// visualEarnings
+	};
+	return config;
+}
+
+export { CIQ, getDefaultConfig, getCustomConfig };

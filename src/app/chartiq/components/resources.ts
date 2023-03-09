@@ -106,16 +106,22 @@ function getCustomConfig({
 		marketDepth,
 		signalIQ,
 		tfc,
+		technicalInsights,
 		timeSpanEventPanel,
-		visualEarnings
-	} = config.plugins
+		visualEarnings,
+	} = config.plugins;
+
 	config.plugins = {
 		// marketDepth,
 		signalIQ,
 		// tfc,
+		// technicalInsights: {
+		// 	...technicalInsights,
+		// 	uid: ""
+		// },
 		// timeSpanEventPanel,
 		// visualEarnings
-	}
+	};
 
 	// Enable / disable addOns
 	// config.enabledAddOns.tooltip = false;

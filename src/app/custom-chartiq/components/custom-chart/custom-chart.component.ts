@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 // Defines available Chartiq library resources for use in ChartService
-import { CIQ, getDefaultConfig } from './resources'; // ChartIQ library resources
+import { CIQ, getCustomConfig } from './resources'; // ChartIQ library resources
 import { CustomChartService } from '../../custom-chart.service'; // Angular service for CIQ resources
 
 @Component({
@@ -23,7 +23,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
 
 		CIQ['debug'] = false;
 
-		const config = getDefaultConfig();
+		const config = getCustomConfig();
 
 		// Customize configuration prior to passing it as parameter chart creation
 		config.initialSymbol = this.symbol || {
@@ -32,27 +32,6 @@ export class CustomChartComponent implements OnInit, OnDestroy {
 			exchDisp: "NASDAQ"
 		};
 		// config.quoteFeeds[0].behavior.refreshInterval = 0;
-
-		// Enable any extra addOns here before creating the chart
-		// config.enabledAddOns.forecasting = true;
-		// config.enabledAddOns.tooltip = false;
-
-		// Enable plugins
-		const { 
-			marketDepth,
-			signalIQ,
-			tfc,
-			timeSpanEventPanel,
-			visualEarnings
-		} = config.plugins;
-		// Select only plugin configurations that needs to be active for this chart
-		config.plugins = { 
-			// marketDepth,
-			signalIQ,
-			// tfc,
-			// timeSpanEventPanel,
-			// visualEarnings
-		};
 
 		config.chartId = this.chartId;
 

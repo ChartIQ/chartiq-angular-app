@@ -82,18 +82,25 @@ function getDefaultConfig() {
 	const { 
 		marketDepth,
 		tfc,
+		technicalInsights,
 		timeSpanEventPanel,
 		signalIQ,
 		visualEarnings
 	} = config.plugins;
+
 	// Select only plugin configurations that needs to be active for this chart
-	config.plugins = { 
+	config.plugins = {
 		marketDepth,
-		tfc,
-		// timeSpanEventPanel,
 		// signalIQ,
+		tfc,
+		// technicalInsights: {
+		// 	...technicalInsights,
+		// 	uid: ""
+		// },
+		// timeSpanEventPanel,
 		// visualEarnings
 	};
+
 	
 	return config;
 }

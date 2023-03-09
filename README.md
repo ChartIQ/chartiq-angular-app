@@ -33,7 +33,7 @@ The ChartIQ Angular application was built using the Angular 13 framework with [A
 
 ## Requirements
 
-A copy of the ChartIQ library, version 8.8.1 or later.
+A copy of the ChartIQ library; works best with version 8.9.0 or later.
 
 If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 

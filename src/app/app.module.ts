@@ -43,7 +43,7 @@ import { RouteListComponent } from './route-list/route-list.component';
         loadChildren: () => import("./custom-chartiq/custom-chartiq.module")
             .then(m => m.ChartiqModule)
     },
-], { relativeLinkResolution: 'legacy' })],
+])],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	bootstrap: [AppComponent],
 })

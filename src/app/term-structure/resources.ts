@@ -1,8 +1,8 @@
 /* Place styles up here so they can be overridden by plugin and page styles if need be */
 // import "chartiq/css/normalize.css";
 // import "chartiq/css/page-defaults.css";
-import "chartiq/css/stx-chart.css";
-import "chartiq/css/chartiq.css";
+// import "chartiq/css/stx-chart.css";
+// import "chartiq/css/chartiq.css";
 
 import "chartiq/plugins/crosssection/sample.css"
 // import "chartiq/plugins/crosssection/crosssection.css"
@@ -29,6 +29,9 @@ import "chartiq/examples/feeds/symbolLookupChartIQ.js";
 
 import "chartiq/examples/markets/marketDefinitionsSample.js";
 import "chartiq/examples/markets/marketSymbologySample.js";
+
+import getLicenseKey from 'chartiq/key';
+getLicenseKey(CIQ);
 
 function getDefaultConfig () {
 	return getConfig({

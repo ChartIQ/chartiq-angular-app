@@ -46,6 +46,11 @@ export class ChartService {
 	}
 
 	createChartAndUI({ container, config }) {
+		const useStudyMenu = /studymenu=y/.test(document.location.href)
+		if (useStudyMenu) {
+			delete CIQ.Studies['Favorites'];
+		}
+
 		portalizeContextDialogs(container);
 
 		setTimeout(() => {

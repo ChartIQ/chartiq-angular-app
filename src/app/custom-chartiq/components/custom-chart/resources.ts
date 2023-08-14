@@ -66,13 +66,21 @@ import "chartiq/plugins/signaliq/signaliq-paintbar";
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
+import getLicenseKey from 'chartiq/key';
+getLicenseKey(CIQ);
+
 function getDefaultConfig () {
-	return getConfig({
+	const config = getConfig({
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
 		markerFeed: marker.MarkersSample,
 		scrollStyle: PerfectScrollbar,
 	});
+	config.menuStudiesConfig.excludedStudies = {
+		...config.menuStudiesConfig.excludedStudies,
+		...{ DoM: true }
+	};
+	return config;
 }
 
 function getCustomConfig() {

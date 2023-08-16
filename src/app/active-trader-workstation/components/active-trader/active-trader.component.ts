@@ -46,7 +46,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 		};
 
 		config.menuChartPreferences = config.menuChartPreferences.filter(item => (
-			item.label !== 'Market Depth' && item.label !== 'Extended Hours'
+			item.label !== 'Extended Hours'
 		));
 
 		config.addOns.tableView.coverContainer = ".ciq-chart-area";

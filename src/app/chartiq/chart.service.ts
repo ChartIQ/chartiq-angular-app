@@ -2,15 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { CIQ } from 'chartiq/js/componentUI';
-
-const {
-	Chart,
-	observeProperty,
-	BaseComponent: {
-		prototype: { channelRead, channelWrite, channelSubscribe },
-	},
-} = CIQ.UI;
+import { getCIQResources } from './components/dynamic_resources';
 
 /**
  * Creates the chart engine and UI.
@@ -29,15 +21,6 @@ export class ChartService {
 	breakpoint$ = new BehaviorSubject('');
 	layout$ = new BehaviorSubject({});
 
-	constructor() {
-		this.chart = new Chart();
-	}
-
-	createChart(container: HTMLElement, config = null) {
-		this.stx = this.chart.createChart(container, config);
-		return this.stx;
-	}
-
 	destroyChart() {
 		if (this.stx) {
 			this.stx.destroy();
@@ -48,45 +31,66 @@ export class ChartService {
 	createChartAndUI({ container, config }) {
 		portalizeContextDialogs(container);
 
-		setTimeout(() => {
-			// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
-			// This is not required and is used just as an integration example
-			this.chart.breakpointSetter = () => value => {
-				// console.log('breakpoint value', value);
-			};
-			const uiContext = this.chart.createChartAndUI({ container, config });
+		getCIQResources()
+			.then(({ CIQ, getDefaultConfig, resources }) => {
+				const {
+					Chart,
+					BaseComponent: {
+						prototype: { channelRead, channelWrite, channelSubscribe },
+					},
+				} = CIQ.UI;
 
-			this.stx = uiContext.stx;
-			this.uiContext = uiContext;
+				this.chart = new Chart();
 
-			const { channels } = config;
+				const chartConfig = getDefaultConfig({ ...resources, ...config });
 
-			// Attach channel methods to remove the need to provide stx parameter
-			// taking advantage of stx availability as an instance member
-			this.channelSubscribe = channelSubscribe;
+				// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
+				// This is not required and is used just as an integration example
+				this.chart.breakpointSetter = () => value => {
+					// console.log('breakpoint value', value);
+				};
+				const uiContext = this.chart.createChartAndUI({
+					container,
+					config: chartConfig
+				});
 
-			// Translate breakpoint channel in RxJs stream
-			this.channelSubscribe(channels.breakpoint, value =>
-				this.breakpoint$.next(value)
-			);
+				this.stx = uiContext.stx;
+				this.uiContext = uiContext;
 
-			// Additional ways of capturing state changes in chart engine and UI
+				const { channels } = chartConfig;
 
-			// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
-			// this.stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
-			// Subscribe to created layout stream
-			// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (layout['timeUnit'] || 'day')));
+				// Attach channel methods to remove the need to provide stx parameter
+				// taking advantage of stx availability as an instance member
+				this.channelSubscribe = channelSubscribe;
 
-			// Observe a single property in engine layout
-			// observeProperty(
-			// 	'periodicity',
-			// 	this.stx.layout,
-			// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
-			// );
+				// Translate breakpoint channel in RxJs stream
+				this.channelSubscribe(channels.breakpoint, value =>
+					this.breakpoint$.next(value)
+				);
 
-			// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
-			// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
-		}, 0);
+				// Additional ways of capturing state changes in chart engine and UI
+
+				// Create layout stream, see parameters at https://documentation.chartiq.com/global.html#layoutEventListener
+				// this.stx.addEventListener('layout', ({ layout }) => this.layout$.next(layout));
+				// Subscribe to created layout stream
+				// this.layout$.subscribe((layout) => console.log('layout$.timeUnit = ' + (layout['timeUnit'] || 'day')));
+
+				// Observe a single property in engine layout
+				// observeProperty(
+				// 	'periodicity',
+				// 	this.stx.layout,
+				// 	({ value: periodicity }) => console.log('observed change in periodicity', periodicity )
+				// );
+
+				// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
+				// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
+			})
+			.catch(error => {
+				console.log('license has expired', error);
+				const contextEl = document.querySelector('cq-context') as HTMLElement;
+				contextEl.innerHTML = 'Chart is not available';
+				Object.assign(contextEl.style, { fontSize: '64px' });
+			});
 	}
 }
 

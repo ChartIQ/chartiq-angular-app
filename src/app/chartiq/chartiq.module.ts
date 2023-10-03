@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import {
 	AdvancedChartComponent,
 	AdvancedChartWrapperComponent,
-	MultiChartComponent
 } from './components';
 
 @NgModule({
-	declarations: [AdvancedChartComponent, MultiChartComponent, AdvancedChartWrapperComponent],
+	declarations: [AdvancedChartComponent,  AdvancedChartWrapperComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	imports: [
 		CommonModule,
@@ -17,6 +16,6 @@ import {
 			{ path: 'technical-analysis', component: AdvancedChartWrapperComponent }
 		])
 	],
-	exports: [AdvancedChartComponent, AdvancedChartWrapperComponent, MultiChartComponent]
+	exports: [AdvancedChartComponent, AdvancedChartWrapperComponent]
 })
 export class ChartiqModule {}

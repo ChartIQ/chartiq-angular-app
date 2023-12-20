@@ -20,6 +20,8 @@ The ChartIQ Angular application is a toolkit of components that enable you to bu
 - `MultiChartComponent` &mdash; Displays two advanced charts on screen simultaneously
 - `ActiveTraderComponent` &mdash; Sets up an information-rich desktop for traders who trade frequently
 - `TermStructureComponent` &mdash; Creates a term structure chart for working with non&ndash;time series data
+  - NOTE: TermStructure is presently incompatible with library web components version 9.1
+  - To use this chart, you need to import legacy web components. See the [upgrade guide](https://documentation.chartiq.com/tutorial-Upgradelog_9.0.0-9.1.2.html) for more information on working with legacy web components.
 - `CustomChartComponent` &mdash; Integrates native Angular components with ChartIQ W3C-standard web components
 - `HelloWorldComponent` &mdash; Creates a basic chart with no user interface as a starting point for your Angular app
 
@@ -33,11 +35,8 @@ The ChartIQ Angular application was built using the Angular 13 framework with [A
 
 ## Requirements
 
-A copy of the ChartIQ library; works best with version 9.0.0 or later.
-
-If you do not have a copy of the library, please contact your account manager or send an email to <info@chartiq.com>.
-
-To get a free trial version of the library, go to the ChartIQ <a href="https://www.spglobal.com/marketintelligence/en/pages/request_follow_up_page" target="_blank">download site</a>.
+- A copy of the ChartIQ JavaScript library (works best with version 9.1.3).
+  - If you do not have a copy of the library or need a different version, please contact your account manager or visit our <a href="https://pages.marketintelligence.spglobal.com/ChartIQ-Follow-up-Request.html" target="_blank">Request Follow-Up Site</a>.
 
 ## Getting started
 

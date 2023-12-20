@@ -62,6 +62,19 @@ export class CustomChartService {
 		this.chart.breakpointSetter = () => value => {
 			// console.log('breakpoint value', value);
 		};
+
+		config.menus.preferences.content = [
+			...config.menus.preferences.content,
+			{ type: "separator" },
+			{ type: 'heading', label: 'Preferences' },
+			{
+				type: 'item',
+				label: 'Drawing Tools',
+				tap: 'Layout.openPreferences',
+				value: 'drawingTools'
+			}
+		];
+
 		const uiContext = this.chart.createChartAndUI({ container, config });
 
 		this.stx = uiContext.stx;

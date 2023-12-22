@@ -3,7 +3,7 @@
 // @import '~chartiq/css/stx-chart.css'; // Chart API
 // @import '~chartiq/css/chartiq.css'; // Chart UI
 
-.info {
+.custom-chart-info {
 	user-select: text;
 	padding: 8px 14px;
 	font-size: .8rem;
@@ -42,4 +42,8 @@
 	position: relative;
 	margin: 10px;
 	height: 65vh;
+}
+
+cq-dialog {
+	top: 0;
 }

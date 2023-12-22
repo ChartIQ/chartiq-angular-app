@@ -32,7 +32,7 @@ import { RouteListComponent } from './route-list/route-list.component';
     //     loadChildren: () => import("./active-trader-workstation/active-trader-workstation.module")
     //     .then(m => m.CryptoIQWorkstationModule)
     // },
-    //  Uncomment following lines if Term Structure module is available
+    // NOTE: TermStructure is presently incompatible with library web components version 9.1
     // {
     //     path: '',
     //     loadChildren: () => import('./term-structure/term-structure.module')

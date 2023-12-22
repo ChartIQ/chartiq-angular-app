@@ -50,6 +50,3 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
-// Used for custom elements in web components
-import 'chartiq/js/thirdparty/custom-elements.min.js'

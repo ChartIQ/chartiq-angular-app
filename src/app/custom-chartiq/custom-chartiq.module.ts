@@ -4,14 +4,12 @@ import { CommonModule } from '@angular/common';
 
 import {
 	CustomChartComponent,
-	RecentSymbolsComponent,
 	ShortcutDialogComponent
 } from './components';
 
 @NgModule({
 	declarations: [
 		CustomChartComponent,
-		RecentSymbolsComponent,
 		ShortcutDialogComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

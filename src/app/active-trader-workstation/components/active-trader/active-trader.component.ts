@@ -42,12 +42,13 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 			step:true,
 			record:true,
 			height:"40%",
-			precedingContainer:"#marketDepthBookmark"
+			precedingContainer:"#marketDepthBookmark",
+			interaction: true
 		};
 
-		config.menuChartPreferences = config.menuChartPreferences.filter(item => (
-			item.label !== 'Extended Hours'
-		));
+		config.menus.preferences.content = config.menus.preferences.content.filter(
+			(item) => item.label !== "Extended Hours"
+		);
 
 		config.addOns.tableView.coverContainer = ".ciq-chart-area";
 

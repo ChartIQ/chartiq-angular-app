@@ -9,6 +9,7 @@
 		"experimentalDecorators": true,
 		"module": "es2020",
 		"moduleResolution": "node",
+		"strict": true,
 		// "paths": {},
 		"importHelpers": true,
 		"target": "es6",

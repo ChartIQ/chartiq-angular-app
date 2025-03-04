@@ -14,14 +14,12 @@ import { CustomChartService } from '../../custom-chart.service'; // Angular serv
 export class CustomChartComponent implements OnInit, OnDestroy {
 	@Input() symbol = '';
 	@Input() chartId = '_custom_chart';
-	@ViewChild('contextContainer', { static: true }) contextContainer: ElementRef;
+	@ViewChild('contextContainer', { static: true }) contextContainer!: ElementRef;
 
 	constructor(public chartService: CustomChartService) {}
 
 	ngOnInit() {
-		const container = this.contextContainer.nativeElement;
-
-		CIQ['debug'] = false;
+		const container: HTMLElement = this.contextContainer.nativeElement;
 
 		const config = getCustomConfig();
 
@@ -38,7 +36,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
 		// callback when chart is initialized and intial data available
 		config.onChartReady = (stx) => { /* stx is the chart engine */ };
 
-		this.chartService.createChartAndUI({ container, config });  
+		this.chartService.createChartAndUI({ container, config });
 	}
 
 	ngOnDestroy() {

@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 
 import { CIQ } from 'chartiq/js/componentUI';
 
+import { Config } from 'chartiq/js/defaultConfiguration';
+
 const {
 	Chart,
 	observeProperty,
@@ -21,10 +23,10 @@ const {
  */
 @Injectable()
 export class ChartService {
-	chart: any;
-	stx: any; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
-	uiContext: any; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
-	channelSubscribe: Function;
+	chart: CIQ.UI.Chart;
+	stx?: CIQ.ChartEngine; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
+	uiContext?: CIQ.UI.Context; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
+	channelSubscribe?: Function;
 
 	breakpoint$ = new BehaviorSubject('');
 	layout$ = new BehaviorSubject({});
@@ -33,7 +35,7 @@ export class ChartService {
 		this.chart = new Chart();
 	}
 
-	createChart(container: HTMLElement, config = null) {
+	createChart(container: HTMLElement, config: Config | null = null) {
 		this.stx = this.chart.createChart(container, config);
 		return this.stx;
 	}
@@ -44,12 +46,12 @@ export class ChartService {
 		}
 	}
 
-	createChartAndUI({ container, config }) {
+	createChartAndUI({ container, config }: { container: HTMLElement; config?: Config }) {
 
 		setTimeout(() => {
 			// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
 			// This is not required and is used just as an integration example
-			this.chart.breakpointSetter = () => value => {
+			this.chart.breakpointSetter = () => () => {
 				// console.log('breakpoint value', value);
 			};
 			const uiContext = this.chart.createChartAndUI({ container, config });
@@ -57,14 +59,14 @@ export class ChartService {
 			this.stx = uiContext.stx;
 			this.uiContext = uiContext;
 
-			const { channels } = config;
+			const { channels } = config || {};
 
 			// Attach channel methods to remove the need to provide stx parameter
 			// taking advantage of stx availability as an instance member
 			this.channelSubscribe = channelSubscribe;
 
 			// Translate breakpoint channel in RxJs stream
-			this.channelSubscribe(channels.breakpoint, value =>
+			this.channelSubscribe(channels?.breakpoint, (value: string) =>
 				this.breakpoint$.next(value)
 			);
 

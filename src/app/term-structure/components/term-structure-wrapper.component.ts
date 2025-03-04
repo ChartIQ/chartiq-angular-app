@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { getCustomConfig } from '../resources'
+import { getCustomConfig } from '../resources';
+import { CIQ } from 'chartiq/js/chartiq';
+import { Config } from 'chartiq/js/defaultConfiguration.js';
 
 @Component({
 	selector: 'cq-cross-section-wrapper',
@@ -11,8 +13,8 @@ import { getCustomConfig } from '../resources'
 export class TermStructureWrapperComponent implements OnInit {
 	@Input() symbol?: string | { symbol: string; name?: string; exchDisp?: string };
 	@Input() chartId?: string;
-	@Input() onChartReady?: Function;
-	config: any;
+	@Input() onChartReady?: (stx: CIQ.ChartEngine) => void;
+	config?: Config;
 
 	ngOnInit() {
 		this.config = getCustomConfig({

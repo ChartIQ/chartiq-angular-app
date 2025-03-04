@@ -9,10 +9,30 @@
 		"experimentalDecorators": true,
 		"module": "es2020",
 		"moduleResolution": "node",
-		// "paths": {},
+		"strict": true, 
+		"paths": {
+			"chartiq/*": [
+				"node_modules/@chartiq/technical-analysis/*",
+				"node_modules/@chartiq/core/*",
+				"node_modules/@chartiq/component-ui/*",
+				"node_modules/@chartiq/web-components/*",
+				"node_modules/@chartiq/active-trader/*",
+				"node_modules/@chartiq/crossplot/*",
+				"node_modules/@chartiq/gonogo/*",
+				"node_modules/@chartiq/institutional/*",
+				"node_modules/@chartiq/scriptiq/*",
+				"node_modules/@chartiq/trading-central/*",
+				"node_modules/@chartiq/visual-earnings/*",	 
+				"node_modules/chartiq/*"				 
+			],
+			"keyDir/*": [
+				"/path/to/your/keyfile/*",
+				"node_modules/chartiq/*"
+			]
+		},
 		"importHelpers": true,
 		"target": "es6",
-		"typeRoots": ["node_modules/@types"],
+		"typeRoots": ["node_modules/@types", "src/types"],
 		"lib": ["es2020", "dom"]
 	},
 	"angularCompilerOptions": {

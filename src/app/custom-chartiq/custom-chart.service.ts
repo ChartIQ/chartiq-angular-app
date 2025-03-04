@@ -2,7 +2,28 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
+import { Config } from 'chartiq/js/defaultConfiguration';
+
 import { CIQ } from 'chartiq/js/componentUI';
+
+interface ISymbols {
+	[p: string]: {
+		symbol: string;
+		name: string;
+		exchDisp: string;
+		last: number;
+		count: number;
+	}
+}
+
+type SymbolChangeCbArgs = {
+	symbol: string;
+	symbolObject?: {
+		name?: string;
+		exchDisp?: string;
+	};
+	action: string
+}
 
 const {
 	Chart,
@@ -21,10 +42,10 @@ const {
  */
 @Injectable()
 export class CustomChartService {
-	chart: any;
-	stx: any; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
-	uiContext: any; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
-	channelSubscribe: Function;
+	chart: CIQ.UI.Chart;
+	stx?: CIQ.ChartEngine; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
+	uiContext?: CIQ.UI.Context; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
+	channelSubscribe?: Function;
 
 	store = new CIQ.NameValueStore();
 	symbolStorageName = 'recentSymbols';
@@ -34,7 +55,7 @@ export class CustomChartService {
 	layout$ = new BehaviorSubject({});
 	dialog$ = new BehaviorSubject('');
 
-	drawingToolDetails = {
+	drawingToolDetails: Record<string, string> = {
 		elliottwave: `
 			The Elliott Wave Theory was developed by Ralph Nelson Elliott to describe...
 		`
@@ -44,7 +65,7 @@ export class CustomChartService {
 		this.chart = new Chart();
 	}
 
-	createChart(container: HTMLElement, config = null) {
+	createChart(container: HTMLElement, config: Config | null = null) {
 		this.stx = this.chart.createChart(container, config);
 		return this.stx;
 	}
@@ -56,10 +77,10 @@ export class CustomChartService {
 		}
 	}
 
-	createChartAndUI({ container, config }) {
+	createChartAndUI({ container, config }: { container: HTMLElement; config: Config }) {
 		// Prior to UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
 		// This is not required and is used just as an integration example
-		this.chart.breakpointSetter = () => value => {
+		this.chart.breakpointSetter = () => () => {
 			// console.log('breakpoint value', value);
 		};
 
@@ -89,7 +110,7 @@ export class CustomChartService {
 		this.channelSubscribe = channelSubscribe;
 
 		// Translate breakpoint channel into RxJs stream
-		this.channelSubscribe(channels.breakpoint, value =>
+		this.channelSubscribe(channels.breakpoint, (value: string) =>
 			this.breakpoint$.next(value)
 		);
 
@@ -112,15 +133,15 @@ export class CustomChartService {
 		return uiContext;
 	}
 
-	postInit(container) {
+	postInit(container: HTMLElement) {
 		this.addPreferencesHelper();
 		portalizeContextDialogs(container);
 
 		const self = this;
-		const isForecasting = symbol => /_fcst$/.test(symbol);
-		this.stx.addEventListener(
+		const isForecasting = (symbol: string) => /_fcst$/.test(symbol);
+		this.stx!.addEventListener(
 			'symbolChange',
-			({ symbol, symbolObject, action }) => {
+			({ symbol, symbolObject, action }: SymbolChangeCbArgs) => {
 				if (
 					!isForecasting(symbol) &&
 					(action === 'master' || action === 'add-series')
@@ -131,57 +152,53 @@ export class CustomChartService {
 		);
 	}
 
-	updateCustomization(config): Promise<void> {
+	updateCustomization(config: Config) {
 		// currently only tool shortcuts are customized locally
-		return this.getValue(this.shortcutStorageName).then(shortcuts => {
+		return this.getValue<Record<string, string>>(this.shortcutStorageName).then(shortcuts => {
 			if (!shortcuts || !Object.keys(shortcuts).length) {
 				return;
 			}
-			config.drawingTools.forEach(item => {
+			config.drawingTools.forEach((item) => {
 				item.shortcut = shortcuts[item.tool] || '';
 			});
 		});
 	}
 
-	updateSymbolStore(symbol, { name = '', exchDisp = '' } = {}) {
-		return this.getRecentSymbols().then(list => {
-			const count = ((list[symbol] && list[symbol].count) || 0) + 1;
-			list[symbol] = { symbol, name, exchDisp, count, last: +new Date() };
+	updateSymbolStore(symbol: string, { name = '', exchDisp = '' } = {}) {
+		return this.getRecentSymbols().then((list) => {
+			list = list || {};
+			const count = (list[symbol]?.count || 0) + 1;
+			list[symbol] = {
+				symbol,
+				name,
+				exchDisp,
+				count,
+				last: +new Date()
+			};
 			return this.updateRecentSymbols(list);
 		});
 	}
 
-	getRecentSymbols(): Promise<
-		Record<
-			string,
-			{
-				symbol: string;
-				name: string;
-				exchDisp: string;
-				last: number;
-				count: number;
-			}
-		>
-	> {
-		return this.getValue(this.symbolStorageName);
+	getRecentSymbols() {
+		return this.getValue<ISymbols>(this.symbolStorageName);
 	}
 
-	updateRecentSymbols(value) {
-		return this.setValue(this.symbolStorageName, value);
+	updateRecentSymbols<T extends ISymbols>(value: T) {
+		return this.setValue<T>(this.symbolStorageName, value);
 	}
 
-	getValue(name): Promise<any> {
-		return new Promise((resolve, reject) => {
+	getValue<T extends Record<string, string> | ISymbols>(name: string) {
+		return new Promise<T>((resolve, reject) => {
 			this.store.get(name, (err, value) => {
 				if (err) return reject(err);
-				resolve(value || {});
+				resolve(<T>value);
 			});
 		});
 	}
 
-	setValue(name, value): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this.store.set(name, value, err => {
+	setValue<T extends string | Record<string, any>>(name: string, value: T): Promise<T> {
+		return new Promise<T>((resolve, reject) => {
+			this.store.set(name, value, (err) => {
 				if (err) return reject(err);
 				resolve(value);
 			});
@@ -189,19 +206,17 @@ export class CustomChartService {
 	}
 
 	addPreferencesHelper() {
-		const layoutHelper = this.uiContext.getAdvertised('Layout');
-		layoutHelper.openPreferences = (node, type) => this.openDialog(type);
+		const layoutHelper = this.uiContext?.getAdvertised('Layout');
+
+		if (layoutHelper) {
+			layoutHelper.openPreferences = (node: HTMLElement, type: string) => this.openDialog(type);
+		}
 	}
 
-	getDrawingTools(): {
-		label: string;
-		tool: string;
-		shortcut: string;
-		detail: string;
-	}[] {
+	getDrawingTools() {
 		const { drawingToolDetails: details } = this;
 
-		return this.uiContext.config.drawingTools.map(
+		return this.uiContext?.config?.drawingTools?.map(
 			({ label, shortcut, tool }) => {
 				return {
 					label,
@@ -210,22 +225,24 @@ export class CustomChartService {
 					detail: details[tool]
 				};
 			}
-		);
+		) || [];
 	}
 
-	setDrawingToolShortcuts(shortcuts) {
-		const { config, topNode } = this.uiContext;
+	setDrawingToolShortcuts(shortcuts: Record<string, string>) {
+		const { config, topNode } = this.uiContext || {};
 
-		config.drawingTools.forEach(item => {
+		config?.drawingTools?.forEach((item) => {
 			item.shortcut = shortcuts[item.tool];
 		});
 
 		this.setValue(this.shortcutStorageName, shortcuts);
 
-		rebuildDrawingPalette(topNode);
+		if (topNode) {
+			rebuildDrawingPalette(topNode);
+		}
 	}
 
-	openDialog(name) {
+	openDialog(name: string) {
 		this.dialog$.next(name);
 	}
 
@@ -238,7 +255,7 @@ export class CustomChartService {
  * For applications that have more then one chart, keep single dialog of the same type
  * and move it outside context node to be shared by all chart components
  */
-function portalizeContextDialogs(container) {
+function portalizeContextDialogs(container: HTMLElement) {
 	container.querySelectorAll('cq-dialog').forEach(dialog => {
 		dialog.remove();
 		if (!dialogPortalized(dialog)) {
@@ -247,26 +264,34 @@ function portalizeContextDialogs(container) {
 	});
 }
 
-function dialogPortalized(el) {
-	const tag = el.firstChild.nodeName.toLowerCase();
-	return Array.from(document.querySelectorAll(tag)).some(
-		el => !el.closest("cq-context")
-	);
+function dialogPortalized(el: Element) {
+	const tag = el.firstChild?.nodeName?.toLowerCase();
+	const elements = tag ? Array.from(document.querySelectorAll(tag)) : [];
+	return elements.some((element) => !element.closest("cq-context"));
 }
 
-function rebuildDrawingPalette(el) {
-	const qs = path => el.querySelector(path);
+function rebuildDrawingPalette(el: Element) {
+	const qs = <T extends Element = Element>(path: string): T | null => el.querySelector(path);
 	const container = qs('.palette-dock-container');
-	const palette = qs('cq-drawing-palette');
+	const palette = qs<Element & { keyStroke: Function; handleMessage: Function }>('cq-drawing-palette');
 	const newPalette = document.createElement('cq-drawing-palette');
 
-	newPalette.className = palette.className;
-	newPalette.setAttribute('docked', palette.getAttribute('docked'));
-	newPalette.setAttribute('orientation', palette.getAttribute('orientation'));
-	newPalette.setAttribute('min-height', palette.getAttribute('min-height'));
-	const noOp = () => {};
-	palette.keyStroke = palette.handleMessage = noOp;
-	palette.remove();
+	if (palette) {
+		newPalette.className = palette.className;
 
-	container.appendChild(newPalette);
+		const qualifiedNames = ['docked', 'orientation', 'min-height'];
+
+		qualifiedNames.forEach((qualifiedName) => {
+			const attribute = palette.getAttribute(qualifiedName);
+
+			if (attribute) {
+				newPalette.setAttribute(qualifiedName, attribute);
+			}
+		});
+		const noOp = () => {};
+		palette.keyStroke = palette.handleMessage = noOp;
+		palette.remove();
+	}
+
+	container?.appendChild(newPalette);
 }

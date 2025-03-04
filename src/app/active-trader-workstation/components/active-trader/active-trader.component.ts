@@ -14,15 +14,13 @@ const { channelWrite } = CIQ.UI.BaseComponent.prototype;
 	providers: [ChartService]
 })
 export class ActiveTraderComponent implements OnInit, OnDestroy {
-	@ViewChild('contextContainer', { static: true }) contextContainer: ElementRef;
+	@ViewChild('contextContainer', { static: true }) contextContainer!: ElementRef;
 	@Input() chartId = '_active_trader';
 
 	constructor(public chartService: ChartService) {}
 
 	ngOnInit() {
-		const container = this.contextContainer.nativeElement;
-
-		CIQ['debug'] = false;
+		const container: HTMLElement = this.contextContainer.nativeElement;
 
 		// Customize configuration prior to passing it as parameter chart creation
 		// config.quoteFeeds[0].behavior.refreshInterval = 0;
@@ -54,11 +52,11 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 
 
 		// callback when chart is initialized and intial data available
-		config.onChartReady = (stx) => { /* stx is the chart engine */ };
+		config.onChartReady = (stx: CIQ.ChartEngine) => { /* stx is the chart engine */ };
 
 		const uiContext = this.chartService.createChartAndUI({ container, config });
 
-		this.cryptoSetup(uiContext.stx)
+		this.cryptoSetup(uiContext.stx);
 		if (window['d3']) {
 			this.setUpMoneyFlowChart(uiContext.stx);
 		} else {
@@ -75,7 +73,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 		this.chartService.destroyChart();
 	}
 
-	cryptoSetup(stx) {
+	cryptoSetup(stx: CIQ.ChartEngine) {
 		stx.setChartType("line");
 		CIQ.extend(stx.layout,{
 			crosshair:true,
@@ -88,13 +86,15 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 		stx.changeOccurred("layout");
 
 		// Simulate L2 data using https://documentation.chartiq.com/CIQ.ChartEngine.html#updateCurrentMarketData
-		CIQ["simulateL2"]({ stx, onInterval: 1000, onTrade: true });
+		(
+			CIQ as unknown as { simulateL2: (params: { onTrade: boolean, stx: CIQ.ChartEngine, onInterval: number }) => void }
+		)["simulateL2"]({ stx, onInterval: 1000, onTrade: true });
 	}
 
-	setUpMoneyFlowChart(stx) {
+	setUpMoneyFlowChart(stx: CIQ.ChartEngine) {
 		stx.moneyFlowChart=moneyFlowChart(stx);
 
-		function moneyFlowChart(stx){
+		function moneyFlowChart(stx: CIQ.ChartEngine){
 			const initialPieData = {
 				Up: { index: 1 },
 				Down: { index: 2 },
@@ -103,17 +103,17 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 
 			const pieChart=new CIQ.Visualization({
 				container: "cq-tradehistory-table div[pie-chart] div",
-				renderFunction: CIQ["SVGChart"].renderPieChart,
+				renderFunction: CIQ.SVGChart.renderPieChart,
 				colorRange: ["#8cc176","#b82c0c","#7c7c7c"],
 				className: "pie",
 				valueFormatter: CIQ.condenseInt
 			}).updateData(CIQ.clone(initialPieData));
 
-			let last = null;
-			stx.append("updateCurrentMarketData",function(data, chart, symbol, params){
+			let last: Element | null = null;
+			stx.append("updateCurrentMarketData",function(data: object, chart?: CIQ.ChartEngine.Chart | null, symbol?: string | null) {
 				if(symbol) return;
 				const items = document.querySelectorAll("cq-tradehistory-body cq-item");
-				var d = {};
+				var d: Record<string, number> = {};
 				for(var i = 0;i < items.length; i++){
 					const item = items[i];
 					if (item === last) break;
@@ -121,12 +121,12 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 					if(!dir) dir="even";
 					dir = CIQ.capitalize(dir);
 					if (!d[dir]) d[dir] = 0;
-					d[dir] += parseFloat(item.querySelector("[col=amount]").getAttribute("rawval"));
+					d[dir] += parseFloat(item.querySelector("[col=amount]")?.getAttribute("rawval") || '');
 				}
 				if(i) pieChart.updateData(d, "add");
 				last = items[0];
 			});
-			stx.addEventListener("symbolChange",function(obj){
+			stx.addEventListener("symbolChange",function(){
 				pieChart.updateData(CIQ.clone(initialPieData));
 			});
 			return pieChart;

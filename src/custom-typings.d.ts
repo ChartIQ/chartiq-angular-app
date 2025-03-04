@@ -28,3 +28,8 @@ import * as _ from 'lodash'
  * see https://github.com/typings/registry
  *
  */
+
+interface Window {
+	d3?: object;
+	getLicenseKey?: (CIQ: object) => void;
+}

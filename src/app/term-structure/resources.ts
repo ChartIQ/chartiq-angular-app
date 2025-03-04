@@ -19,7 +19,6 @@ import "chartiq/plugins/crosssection/ui.js";
 import "chartiq/plugins/crosssection/timelineDateSelector.js";
 import quoteFeed from "chartiq/examples/feeds/termstructureDataSimulator.js";
 
-import "chartiq/plugins/crosssection/sample.css";
 /* Template-specific imports */
 import getConfig from "chartiq/js/defaultConfiguration.js";
 
@@ -30,8 +29,14 @@ import "chartiq/examples/feeds/symbolLookupChartIQ.js";
 import "chartiq/examples/markets/marketDefinitionsSample.js";
 import "chartiq/examples/markets/marketSymbologySample.js";
 
-import getLicenseKey from 'chartiq/key';
+import getLicenseKey from 'keyDir/key';
 getLicenseKey(CIQ);
+
+type GetCustomConfigArgsType = {
+	chartId?: string
+	symbol?: string | { symbol: string; name?: string; exchDisp?: string }
+	onChartReady?: (stx: CIQ.ChartEngine) => void
+}
 
 function getDefaultConfig () {
 	return getConfig({
@@ -42,15 +47,7 @@ function getDefaultConfig () {
 }
 
 // Creates a complete customised configuration object
-function getCustomConfig({
-	chartId,
-	symbol,
-	onChartReady
-}: {
-	chartId?: string
-	symbol?: string | { symbol: string; name?: string; exchDisp?: string }
-	onChartReady?: Function
-} = {}) {
+function getCustomConfig({ chartId, symbol, onChartReady }: GetCustomConfigArgsType = {}) {
 	const config = getDefaultConfig();
 
 	config.enabledAddOns.rangeSlider = false;
@@ -68,46 +65,48 @@ function getCustomConfig({
 		{ type: "item", label: "Ask", cmd: "Layout.setYaxisField('ask')" }
 	];
 	config.menuChartPreferences = [
-			{ type: "checkbox", label: "Shading", cmd: "Layout.Shading()" },
-			{ type: "checkbox", label: "X-Axis Scaling", cmd: "Layout.XAxisScaling()" },
-			{
-				type: "checkbox",
-				label: "Update Animations",
-				cmd: "Layout.UpdateAnimations()"
-			},
-			{ type: "checkbox", label: "Show Update Stamp", cmd: "Layout.UpdateStamp()" },
-			{
-				type: "checkboxOptions",
-				label: "Recent Updates",
-				cmd: "Layout.FreshPoints()",
-				options: "Layout.showFreshnessEdit()"
-			},
-			{
-				type: "checkbox",
-				label: "Timeline Date Selector",
-				cmd: "Layout.TimelineDateSelector()"
-			}
+		{ type: "checkbox", label: "Shading", cmd: "Layout.Shading()" },
+		{ type: "checkbox", label: "X-Axis Scaling", cmd: "Layout.XAxisScaling()" },
+		{
+			type: "checkbox",
+			label: "Update Animations",
+			cmd: "Layout.UpdateAnimations()"
+		},
+		{ type: "checkbox", label: "Show Update Stamp", cmd: "Layout.UpdateStamp()" },
+		{
+			type: "checkboxOptions",
+			label: "Recent Updates",
+			cmd: "Layout.FreshPoints()",
+			options: "Layout.showFreshnessEdit()"
+		},
+		{
+			type: "checkbox",
+			label: "Timeline Date Selector",
+			cmd: "Layout.TimelineDateSelector()"
+		}
 	];
 
 	const { crossSection } = config.plugins;
-  config.plugins = { crossSection };
+	config.plugins = { crossSection };
 
-	config.plugins.crossSection.sortFunction = (l, r) => {
-		let weight = ["DY", "WK", "MO", "YR", "ST", "MT", "LT"];
-		let l1 = l.split(" "),
-			r1 = r.split(" ");
-		let diff =
-			weight.indexOf(l1[l1.length - 1]) - weight.indexOf(r1[r1.length - 1]);
-		if (diff) return diff > 0 ? 1 : -1;
-	
-		if (isNaN(l1[0])) return 1;
-		if (isNaN(r1[0])) return -1;
-		if (Number(l1[0]) < Number(r1[0])) return -1;
-		if (Number(r1[0]) < Number(l1[0])) return 1;
-		return 0;
-	};
+	if (config.plugins.crossSection) {
+		config.plugins.crossSection.sortFunction = (l: string, r: string) => {
+			let weight = ["DY", "WK", "MO", "YR", "ST", "MT", "LT"];
+			let l1 = l.split(" "),
+				r1 = r.split(" ");
+			let diff =
+				weight.indexOf(l1[l1.length - 1]) - weight.indexOf(r1[r1.length - 1]);
+			if (diff) return diff > 0 ? 1 : -1;
 
-	return config
+			if (isNaN(Number(l1[0]))) return 1;
+			if (isNaN(Number(r1[0]))) return -1;
+			if (Number(l1[0]) < Number(r1[0])) return -1;
+			if (Number(r1[0]) < Number(l1[0])) return 1;
+			return 0;
+		};
+	}
+
+	return config;
 }
 
 export { CIQ, getCustomConfig };

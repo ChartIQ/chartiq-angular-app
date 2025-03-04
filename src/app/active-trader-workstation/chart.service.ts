@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
+import { Config } from 'chartiq/js/defaultConfiguration.js';
+
 import { CIQ } from 'chartiq/js/componentUI';
 
 const {
@@ -21,10 +23,10 @@ const {
  */
 @Injectable()
 export class ChartService {
-	chart: any;
-	stx: any; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
-	uiContext: any; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
-	channelSubscribe: Function;
+	chart: CIQ.UI.Chart;
+	stx?: CIQ.ChartEngine; // ChartEngine - https://documentation.chartiq.com/CIQ.ChartEngine.html
+	uiContext?: CIQ.UI.Context; // UI Context - https://documentation.chartiq.com/CIQ.UI.Context.html
+	channelSubscribe?: Function;
 
 	breakpoint$ = new BehaviorSubject('');
 	layout$ = new BehaviorSubject({});
@@ -33,7 +35,7 @@ export class ChartService {
 		this.chart = new Chart();
 	}
 
-	createChart(container: HTMLElement, config = null) {
+	createChart(container: HTMLElement, config: Config | null = null) {
 		this.stx = this.chart.createChart(container, config);
 		return this.stx;
 	}
@@ -48,10 +50,10 @@ export class ChartService {
 		if (moneyFlowChart) moneyFlowChart.destroy();
 	}
 
-	createChartAndUI({ container, config }) {
+	createChartAndUI({ container, config }: { container: HTMLElement; config: Config }) {
 		// Prior to UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
 		// This is not required and is used just as an integration example
-		this.chart.breakpointSetter = () => value => {
+		this.chart.breakpointSetter = () => () => {
 			// console.log('breakpoint value', value);
 		};
 		const uiContext = this.chart.createChartAndUI({ container, config });
@@ -66,7 +68,7 @@ export class ChartService {
 		this.channelSubscribe = channelSubscribe;
 
 		// Translate breakpoint channel into RxJs stream
-		this.channelSubscribe(channels.breakpoint, value =>
+		this.channelSubscribe(channels.breakpoint, (value: string) =>
 			this.breakpoint$.next(value)
 		);
 

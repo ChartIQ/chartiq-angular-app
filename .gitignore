@@ -48,7 +48,12 @@ dist
 typings
 
 # VSCode
-.vscode
+.vscode/
+*.code-workspace
+
+# eclipse
+.project
+.settings/
 
 # Yarn lock file (https://yarnpkg.com)
 yarn.lock
@@ -65,9 +70,8 @@ Thumbs.db
 *~
 *.swp
 
-#Ignore stx folder
+#Ignore tests
 stx
-
-#Ignore allure reports
 allure-report
 allure-results
+tests/package-lock.json

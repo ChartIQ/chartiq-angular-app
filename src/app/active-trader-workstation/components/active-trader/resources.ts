@@ -61,8 +61,8 @@ import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
 // Trading Central: Technical Insights
 // import 'chartiq/plugins/technicalinsights/components'
 
-// Trading Central: Analyst Views
-// import 'chartiq/plugins/analystviews/components';
+// Trading Central: Technical Views
+// import 'chartiq/plugins/technicalviews/components';
 
 // Visual Earnings
 // import 'chartiq/plugins/visualearnings/visualearnings';
@@ -94,8 +94,18 @@ function getDefaultConfig() {
 		// signalIQ,
 		tfc,
 		// technicalInsights: {
-		// 	...technicalInsights,
-		// 	uid: ""
+		//	container: "",
+		//	moduleName: "",
+		//	lang: "en",
+		//	channel: "",
+		//	toggleMarkup: "",
+		//	...technicalInsights,
+		//	token: "",
+		// 	// use for dynamic plugin load
+		//  // @ts-ignore // ignore since load isn't defined in ts definition
+		// 	// load() {
+		// 	//	return import('chartiq/plugins/technicalinsights/components')
+		// 	// }
 		// },
 		// timeSpanEventPanel,
 		// visualEarnings

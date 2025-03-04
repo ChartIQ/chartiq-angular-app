@@ -46,9 +46,6 @@ import "chartiq/plugins/signaliq/signaliq-paintbar";
 
 // import "chartiq/plugins/studybrowser";
 
-// Trading Central: Analyst Views
-// import 'chartiq/plugins/analystviews/components';
-
 // TFC plugin
 // import 'chartiq/plugins/tfc/tfc-loader';
 // import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
@@ -60,13 +57,16 @@ import "chartiq/plugins/signaliq/signaliq-paintbar";
 // Trading Central: Technical Insights
 // import 'chartiq/plugins/technicalinsights/components';
 
+// Trading Central: Technical Views
+// import 'chartiq/plugins/technicalviews/components';
+
 // Visual Earnings
 // import 'chartiq/plugins/visualearnings/visualearnings';
 
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
-import getLicenseKey from 'chartiq/key';
+import getLicenseKey from 'keyDir/key';
 getLicenseKey(CIQ);
 
 function getDefaultConfig () {
@@ -98,7 +98,7 @@ function getCustomConfig() {
 		signalIQ,
 		tfc,
 		technicalInsights,
-		timeSpanEventPanel,
+		ptv,
 		visualEarnings,
 	} = config.plugins;
 
@@ -107,10 +107,31 @@ function getCustomConfig() {
 		signalIQ,
 		// tfc,
 		// technicalInsights: {
-		// 	...technicalInsights,
-		// 	uid: ""
+		//	container: "",
+		//	moduleName: "",
+		//	lang: "en",
+		//	channel: "",
+		//	toggleMarkup: "",
+		//	...technicalInsights,
+		//	token: "",
+		// 	// use for dynamic plugin load
+		//  // @ts-ignore // ignore since load isn't defined in ts definition
+		// 	// load() {
+		// 	//	return import('chartiq/plugins/technicalinsights/components')
+		// 	// }
 		// },
-		// timeSpanEventPanel,
+		ptv: {
+				moduleName: "TimeSpanEventPanel",
+				menuItemSelector: ".stx-markers cq-item.span-event, .ciq-markers .item.ciq-active[stxtap*=TimeSpanEvent]",
+				loadSample: true,
+				showTooltip: true,
+				// Event info can be displayed in "main" chart or in TSE "panel"
+				infoPanel: {
+					durationEvent: 'main',
+					spanEvent: 'main',
+					singleEvent: 'main'
+				}
+			},
 		// visualEarnings
 	};
 	return config;

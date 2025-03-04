@@ -43,6 +43,13 @@
               "src/styles.scss",
               "src/app/chartiq-base-styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./node_modules/@chartiq/core",
+                "./node_modules/@chartiq/crossplot",
+                "./node_modules/chartiq"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

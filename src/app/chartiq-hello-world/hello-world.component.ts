@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } fr
 
 import { CIQ } from 'chartiq/js/chartiq';
 
-import getLicenseKey from 'chartiq/key';
+import getLicenseKey from 'keyDir/key';
 getLicenseKey(CIQ);
 
 /**
@@ -16,12 +16,12 @@ getLicenseKey(CIQ);
 	encapsulation: ViewEncapsulation.None
 })
 export class HelloWorldComponent implements AfterViewInit {
-	@ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
+	@ViewChild('chartContainer', { static: true }) chartContainer?: ElementRef;
 
 	constructor() {}
 
 	ngAfterViewInit() {
-		const container = this.chartContainer.nativeElement;
+		const container = this.chartContainer?.nativeElement;
 
 		const stx = new CIQ.ChartEngine({ container });
 

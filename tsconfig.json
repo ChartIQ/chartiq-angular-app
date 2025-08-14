@@ -3,16 +3,17 @@
 	"compilerOptions": {
 		"baseUrl": "./",
 		"outDir": "./dist/out-tsc",
-		"sourceMap": true,
-		"declaration": false,
-		"downlevelIteration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": false,
 		"experimentalDecorators": true,
 		"module": "es2020",
 		"moduleResolution": "node",
-		"strict": true, 
+		"strict": true,
 		"paths": {
 			"chartiq/*": [
 				"node_modules/@chartiq/technical-analysis/*",
+				"node_modules/@chartiq/chart2music/*",
 				"node_modules/@chartiq/core/*",
 				"node_modules/@chartiq/component-ui/*",
 				"node_modules/@chartiq/web-components/*",
@@ -22,8 +23,8 @@
 				"node_modules/@chartiq/institutional/*",
 				"node_modules/@chartiq/scriptiq/*",
 				"node_modules/@chartiq/trading-central/*",
-				"node_modules/@chartiq/visual-earnings/*",	 
-				"node_modules/chartiq/*"				 
+				"node_modules/@chartiq/visual-earnings/*",
+				"node_modules/chartiq/*"
 			],
 			"keyDir/*": [
 				"/path/to/your/keyfile/*",
@@ -38,5 +39,9 @@
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
 		"strictInjectionParameters": true
-	}
+	},
+	"include": [
+    "src/**/*.ts",
+		"src/environments/environment.prod.ts"
+  ]
 }

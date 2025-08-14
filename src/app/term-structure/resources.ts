@@ -12,7 +12,10 @@ import { CIQ } from 'chartiq/js/chartiq';
 // Required imports from chartiq for advanced chart
 import "chartiq/js/standard.js";
 import "chartiq/js/components.js";
-import "chartiq/plugins/crosssection/core.js";
+import 'chartiq/js/components-legacy.js';
+import "chartiq/js/componentUI.js";
+
+import 'chartiq/plugins/crosssection/core.js';
 
 import "chartiq/plugins/crosssection/datepicker.js";
 import "chartiq/plugins/crosssection/ui.js";
@@ -28,6 +31,7 @@ import "chartiq/examples/feeds/symbolLookupChartIQ.js";
 
 import "chartiq/examples/markets/marketDefinitionsSample.js";
 import "chartiq/examples/markets/marketSymbologySample.js";
+import 'chartiq/examples/markets/timezones.js';
 
 import getLicenseKey from 'keyDir/key';
 getLicenseKey(CIQ);
@@ -74,7 +78,7 @@ function getCustomConfig({ chartId, symbol, onChartReady }: GetCustomConfigArgsT
 		},
 		{ type: "checkbox", label: "Show Update Stamp", cmd: "Layout.UpdateStamp()" },
 		{
-			type: "checkboxOptions",
+			type: "checkbox",
 			label: "Recent Updates",
 			cmd: "Layout.FreshPoints()",
 			options: "Layout.showFreshnessEdit()"
@@ -85,6 +89,7 @@ function getCustomConfig({ chartId, symbol, onChartReady }: GetCustomConfigArgsT
 			cmd: "Layout.TimelineDateSelector()"
 		}
 	];
+
 
 	const { crossSection } = config.plugins;
 	config.plugins = { crossSection };

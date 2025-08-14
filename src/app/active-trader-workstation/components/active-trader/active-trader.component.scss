@@ -21,6 +21,9 @@
 #cryptoGroup2 {
 	width:25%;
 }
+#cryptoGroup2 .ciq-chart .chartContainer {
+	margin-left: 0 !important;
+}
 #mainChartGroup {
 	display:flex;
 	flex-direction:column;

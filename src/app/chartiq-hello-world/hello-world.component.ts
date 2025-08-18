@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { CIQ } from 'chartiq/js/chartiq';
 
 import getLicenseKey from 'keyDir/key';
@@ -10,10 +10,12 @@ getLicenseKey(CIQ);
  * does not have a user interface.
  */
 @Component({
-	selector: 'cq-hello-world',
-	templateUrl: './hello-world.component.html',
-	styleUrls: ['./hello-world.component.scss'],
-	encapsulation: ViewEncapsulation.None
+    selector: 'cq-hello-world',
+    templateUrl: './hello-world.component.html',
+    styleUrls: ['./hello-world.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+		standalone: true,
+  	imports: [CommonModule]
 })
 export class HelloWorldComponent implements AfterViewInit {
 	@ViewChild('chartContainer', { static: true }) chartContainer?: ElementRef;

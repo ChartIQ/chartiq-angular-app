@@ -135,7 +135,6 @@ export class CustomChartService {
 
 	postInit(container: HTMLElement) {
 		this.addPreferencesHelper();
-		portalizeContextDialogs(container);
 
 		const self = this;
 		const isForecasting = (symbol: string) => /_fcst$/.test(symbol);
@@ -249,25 +248,6 @@ export class CustomChartService {
 	closeDialog() {
 		this.dialog$.next('');
 	}
-}
-
-/**
- * For applications that have more then one chart, keep single dialog of the same type
- * and move it outside context node to be shared by all chart components
- */
-function portalizeContextDialogs(container: HTMLElement) {
-	container.querySelectorAll('cq-dialog').forEach(dialog => {
-		dialog.remove();
-		if (!dialogPortalized(dialog)) {
-			document.body.appendChild(dialog);
-		}
-	});
-}
-
-function dialogPortalized(el: Element) {
-	const tag = el.firstChild?.nodeName?.toLowerCase();
-	const elements = tag ? Array.from(document.querySelectorAll(tag)) : [];
-	return elements.some((element) => !element.closest("cq-context"));
 }
 
 function rebuildDrawingPalette(el: Element) {

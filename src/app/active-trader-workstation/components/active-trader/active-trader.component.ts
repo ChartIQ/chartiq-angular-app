@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // defines resources for use in ChartService providing a way to configurate service
 import { CIQ, getDefaultConfig } from './resources';
 import { ChartService } from '../../chart.service';
@@ -7,15 +7,20 @@ import { ChartService } from '../../chart.service';
 const { channelWrite } = CIQ.UI.BaseComponent.prototype;
 
 @Component({
-	selector: 'cq-active-trader',
-	templateUrl: './active-trader.component.html',
-	styleUrls: ['./active-trader.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	providers: [ChartService]
+    selector: 'cq-active-trader',
+    templateUrl: './active-trader.component.html',
+    styleUrls: ['./active-trader.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [ChartService],
+    standalone: true,
+		imports: [CommonModule],
+		schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ActiveTraderComponent implements OnInit, OnDestroy {
 	@ViewChild('contextContainer', { static: true }) contextContainer!: ElementRef;
 	@Input() chartId = '_active_trader';
+
+	private observer!: MutationObserver;
 
 	constructor(public chartService: ChartService) {}
 
@@ -56,6 +61,7 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 
 		const uiContext = this.chartService.createChartAndUI({ container, config });
 
+
 		this.cryptoSetup(uiContext.stx);
 		if (window['d3']) {
 			this.setUpMoneyFlowChart(uiContext.stx);
@@ -67,6 +73,37 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 
 		// Request TFC channel open
 		channelWrite(config.channels.tfc, true, uiContext.stx);
+
+		//This behavior seems broken in 9.8 across all frameworks (Angular, Vue, React) , I have only verified in react with library 9.7 and its working
+		// [https://chartiq.kanbanize.com/ctrl_board/15/cards/53652/details/ repro steps 3 and 4.]
+		const toggle = document.querySelector('cq-toggle.ciq-draw') as HTMLElement;
+    const mainChartGroup = document.getElementById('mainChartGroup');
+
+    if (!toggle || !mainChartGroup) return;
+
+
+		if (!toggle || !mainChartGroup) return;
+
+		const chartContainer = mainChartGroup.querySelector('.chartContainer');
+		if (!chartContainer) return;
+
+		const updateMargin = () => {
+			const isActive = toggle.classList.contains('active');
+			console.log(isActive, chartContainer);
+			//@ts-ignore
+			chartContainer.style.marginLeft = isActive ? '69px' : '';
+		};
+
+		updateMargin();
+
+		this.observer = new MutationObserver(() => {
+			updateMargin();
+		});
+
+		this.observer.observe(toggle, {
+			attributes: true,
+			attributeFilter: ['class']
+		});
 	}
 
 	ngOnDestroy() {

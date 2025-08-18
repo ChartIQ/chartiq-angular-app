@@ -15,7 +15,7 @@ import 'chartiq/examples/feeds/symbolLookupChartIQ';
 
 import 'chartiq/examples/translations/translationSample';
 
-// Event Markers 
+// Event Markers
 import marker from 'chartiq/examples/markers/markersSample.js';
 import 'chartiq/examples/markers/tradeAnalyticsSample';
 import 'chartiq/examples/markers/videoSample';
@@ -30,17 +30,17 @@ import quoteFeed from "chartiq/examples/feeds/quoteFeedSimulator.js";
 // import forecastQuoteFeed from "chartiq/examples/feeds/quoteFeedForecastSimulator.js";
 
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm.js";
-// Used in SignalIQ 
+// Used in SignalIQ
 // import EmojiPopover from "chartiq/js/thirdparty/emoji-popover.es.js";
 
-import getConfig from 'chartiq/js/defaultConfiguration'; 
+import getConfig from 'chartiq/js/defaultConfiguration';
 
 // Plugins
 
-// Crypto, L2 Heat Map, Market Depth, 
+// Crypto, L2 Heat Map, Market Depth,
 import 'chartiq/plugins/activetrader/cryptoiq';
 
-// ScriptIQ 
+// ScriptIQ
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
 // SignalIQ
@@ -71,15 +71,15 @@ import 'chartiq/plugins/tfc/tfc-demo';   /* if using demo account class */
 import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
 
 function getDefaultConfig() {
-	const config = getConfig({ 
+	const config = getConfig({
 		quoteFeed,
 		// forecastQuoteFeed, // uncomment to enable forcast quote feed simulator
 		markerFeed: marker.MarkersSample,
 		scrollStyle: PerfectScrollbar,
-		// emojiPicker: EmojiPopover // Used in SignalIQ 
+		// emojiPicker: EmojiPopover // Used in SignalIQ
 	});
 
-	const { 
+	const {
 		marketDepth,
 		tfc,
 		technicalInsights,
@@ -111,7 +111,7 @@ function getDefaultConfig() {
 		// visualEarnings
 	};
 
-	
+
 	return config;
 }
 

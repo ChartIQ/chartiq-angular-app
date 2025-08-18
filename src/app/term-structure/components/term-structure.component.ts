@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-
+import { Component, Input, OnInit, OnDestroy, ElementRef, ViewChild, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Config } from 'chartiq/js/defaultConfiguration';
+
 
 import { ChartService } from '../chart.service';
 
@@ -9,7 +10,9 @@ import { ChartService } from '../chart.service';
 	templateUrl: './term-structure.component.html',
 	styleUrls: ['./term-structure.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	providers: [ChartService]
+	providers: [ChartService],
+	imports: [CommonModule],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 
 export class TermStructureComponent implements OnInit, OnDestroy {

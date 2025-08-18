@@ -25,7 +25,7 @@ The ChartIQ Angular application is a toolkit of components that enable you to bu
 - `CustomChartComponent` &mdash; Integrates native Angular components with ChartIQ W3C-standard web components
 - `HelloWorldComponent` &mdash; Creates a basic chart with no user interface as a starting point for your Angular app
 
-The ChartIQ Angular application was built using the Angular 13 framework with [Angular CLI](https://cli.angular.io) support.
+The ChartIQ Angular application was built using the Angular 19 framework with [Angular CLI](https://cli.angular.io) support.
 
 **Note:**
 
@@ -35,7 +35,7 @@ The ChartIQ Angular application was built using the Angular 13 framework with [A
 
 ## Requirements
 
-- A copy of the ChartIQ JavaScript library (works best with version 9.6.2).
+- A copy of the ChartIQ JavaScript library (works best with version 9.9.0).
   - If you do not have a copy of the library or need a different version, please contact your account manager or visit our <a href="https://pages.marketintelligence.spglobal.com/ChartIQ-Follow-up-Request.html" target="_blank">Request Follow-Up Site</a>.
 
 ## Getting started

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CustomChartService } from '../../custom-chart.service';
 
 interface IDrawingTool {
@@ -10,9 +11,12 @@ interface IDrawingTool {
 }
 
 @Component({
-	selector: 'cq-angular-shortcut-dialog',
-	templateUrl: './shortcut-dialog.component.html',
-	styleUrls: ['./shortcut-dialog.component.scss']
+    selector: 'cq-angular-shortcut-dialog',
+    templateUrl: './shortcut-dialog.component.html',
+    styleUrls: ['./shortcut-dialog.component.scss'],
+		standalone: true,
+		imports: [CommonModule],
+		schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ShortcutDialogComponent implements OnInit {
 

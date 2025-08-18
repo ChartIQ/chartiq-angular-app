@@ -94,14 +94,14 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "chartiq-angular:build:production"
+            "buildTarget": "chartiq-angular:build:production"
           },
           "configurations": {
             "production": {
-              "browserTarget": "chartiq-angular:build:production"
+              "buildTarget": "chartiq-angular:build:production"
             },
 						"development": {
-							"browserTarget": "chartiq-angular:build:development"
+							"buildTarget": "chartiq-angular:build:development"
 						}
           },
 					"defaultConfiguration": "development"
@@ -109,7 +109,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "chartiq-angular:build"
+            "buildTarget": "chartiq-angular:build"
           }
         },
         "test": {
@@ -153,8 +153,9 @@
       }
     }
   },
-  "defaultProject": "chartiq-angular",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

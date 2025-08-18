@@ -3,10 +3,12 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { getCustomConfig } from '../resources';
 import { CIQ } from 'chartiq/js/chartiq';
 import { Config } from 'chartiq/js/defaultConfiguration.js';
+import { TermStructureComponent } from './term-structure.component';
 
 @Component({
 	selector: 'cq-cross-section-wrapper',
 	template: '<cq-cross-section [config]="config"></cq-cross-section>',
+	imports: [TermStructureComponent],
 	encapsulation: ViewEncapsulation.None,
 })
 

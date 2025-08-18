@@ -13,14 +13,12 @@
 		</p>
 	</li>
 	<li>
-	<h3>Multi-chart</h3>
-		<p>
-			Coming soon.
-		</p>
+	<h3><a routerLink="/multi-chart">Multi-chart</a></h3>
+	<p>Displays multiple charts with a shared header and footer.</p>
 	</li>
 	<li>
 		<!--
-			Enable the following line if Active Trader is available, and uncomment the Active Trader route in app.module.ts.
+			Enable the following line if Active Trader is available, and uncomment the Active Trader route in app.routes.ts.
 		-->
 		<!-- <h3><a routerLink="/active-trader">Active Trader</a></h3> -->
 		<!-- Remove the following lines if the Active Trader module is available. -->
@@ -42,7 +40,7 @@
 		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">
 			NOTE: TermStructure is presently incompatible with library web components version 9.1
 			<br/>
-			To use this chart, you need to import legacy web components. See the <a href="https://documentation.chartiq.com/tutorial-Upgradelog_9.0.0-9.1.2.html" target="_blank">upgrade guide</a> for more information on working with legacy web components.
+			To use this chart, you need to import legacy web components. See the <a href="https://documentation.chartiq.com/tutorial-Upgradelog_9.0.0-9.1.2.html" target="_blank">upgrade guide</a> for more information on working with legacy web components. Comment out 'css/webcomponents.css' inside the src/app/chartiq-base-styles.scss and refresh the router URL for the term structure template.
 		</p>
 		<p>
 			Creates a term structure chart for working with non&ndash;time series data.
@@ -59,6 +57,7 @@
 		<p>
 			Creates a basic chart with no user interface as a starting point for using the ChartIQ
 			API in Angular.
+		</p>
 	</li>
 </ul>
 <br/>

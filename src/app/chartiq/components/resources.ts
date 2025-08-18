@@ -2,7 +2,9 @@
 
 import { CIQ } from 'chartiq/js/chartiq';
 
+// For multi-chart support, comment out the 'advanced' import below and uncomment the 'standard' import
 import 'chartiq/js/advanced';
+//import "chartiq/js/standard";
 import 'chartiq/js/addOns';
 import 'chartiq/js/components';
 
@@ -37,6 +39,10 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // Crypto, L2 Heat Map, Market Depth,
 // import 'chartiq/plugins/activetrader/cryptoiq';
 
+// Importing the chart2music plugin from ChartIQ
+// chart2music will provide sonification (converting data into sound), support for screen readers, and keyboard handling capabilities.
+import 'chartiq/plugins/chart2music'
+
 // ScriptIQ
 // import 'chartiq/plugins/scriptiq/scriptiq';
 
@@ -66,6 +72,8 @@ import 'chartiq/plugins/studybrowser';
 
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
+
+
 
 import getLicenseKey from 'keyDir/key';
 getLicenseKey(CIQ);
@@ -114,6 +122,9 @@ function getCustomConfig({
 
 	// Select only plugin configurations that needs to be active for this chart
 	const {
+		advanced,
+		// @ts-ignore
+		chart2music,
 		marketDepth,
 		signalIQ,
 		studyBrowser,
@@ -125,6 +136,9 @@ function getCustomConfig({
 	} = config.plugins;
 
 	config.plugins = {
+		advanced,
+		//@ts-ignore
+		chart2music,
 		// marketDepth,
 		signalIQ,
 		studyBrowser,

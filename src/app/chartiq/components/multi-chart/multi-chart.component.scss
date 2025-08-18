@@ -1,8 +1,7 @@
-.left, .right {
-	height: 100%;
-	position: absolute;
-	width: 50%;
+.cq-keyboard-selected-highlight {
+	display: none;
 }
-.right {
-	left: 50%;
+
+.disable-mouse-pointer {
+	cursor: inherit !important;
 }

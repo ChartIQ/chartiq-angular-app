@@ -53,8 +53,6 @@ export class ChartService {
 			delete (CIQ.Studies as unknown as { Favorites?: object })['Favorites'];
 		}
 
-		portalizeContextDialogs(container);
-
 		setTimeout(() => {
 			// Prior UI creation disable breakpoint setter to manage breakpoint setting using Angular tools.
 			// This is not required and is used just as an integration example
@@ -95,23 +93,4 @@ export class ChartService {
 			// CIQ['simulateL2']({ stx: this.stx, onInterval: 1000, onTrade: true });
 		}, 0);
 	}
-}
-
-/**
- * For applications that have more then one chart, keep single dialog of the same type
- * and move it outside context node to be shared by all chart components
- */
-function portalizeContextDialogs(container: HTMLElement) {
-	container.querySelectorAll('cq-dialog').forEach((dialog) => {
-		dialog.remove();
-		if (!dialogPortalized(dialog)) {
-			document.body.appendChild(dialog);
-		}
-	});
-}
-
-function dialogPortalized(el: Element) {
-	const tag = el.firstChild?.nodeName?.toLowerCase();
-	const nodeList = tag ? Array.from(document.querySelectorAll(tag)) : [];
-	return nodeList.some((element) => !element.closest('cq-context'));
 }

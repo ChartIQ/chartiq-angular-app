@@ -1,7 +1,6 @@
 {
 	"name": "chartiq-angular-app",
-	"version": "9.9.0",
-	"chartiqVersion": "9.9.0",
+	"version": "10.1.0",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
@@ -16,6 +15,11 @@
 		"node": ">=18.19.1 "
 	},
 	"license": "ISC",
+	"overrides": {
+		"tar": "^7.5.7",
+		"lodash": "^4.17.22",
+		"diff": "^4.0.4"
+	},
 	"dependencies": {
 		"@angular/animations": "~19.2.12",
 		"@angular/common": "~19.2.12",
@@ -29,12 +33,12 @@
 		"zone.js": "^0.15.1"
 	},
 	"chartiq-dependencies-for-npm": {
-		"@chartiq/active-trader": "^9.6.0",
-		"@chartiq/core": "^9.6.0",
-		"@chartiq/crossplot": "^9.6.0",
-		"@chartiq/technical-analysis": "^9.6.0",
-		"@chartiq/web-components": "^9.6.0",
-		"@chartiq/chart2music": "^9.8.0"
+		"@chartiq/active-trader": "~10.1.0",
+		"@chartiq/core": "~10.1.0",
+		"@chartiq/crossplot": "~10.1.0",
+		"@chartiq/technical-analysis": "~10.1.0",
+		"@chartiq/web-components": "~10.1.0",
+		"@chartiq/chart2music": "~10.1.0"
 	},
 	"devDependencies": {
 		"@angular-builders/custom-webpack": "^19.0.1",

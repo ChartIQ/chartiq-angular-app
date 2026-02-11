@@ -23,13 +23,13 @@ export const appRoutes: Routes = [
         (m) => m.ActiveTraderComponent
       ),
   },
-	{
-    path: 'term-structure',
-    loadComponent: () =>
-      import('./term-structure/components/term-structure-wrapper.component').then(
-        m => m.TermStructureWrapperComponent
-      ),
-  },
+	// {
+  //   path: 'term-structure',
+  //   loadComponent: () =>
+  //     import('./term-structure/components/term-structure-wrapper.component').then(
+  //       m => m.TermStructureWrapperComponent
+  //     ),
+  // },
 	{
     path: 'multi-chart',
 		loadComponent: () =>

@@ -21,9 +21,7 @@
 				"node_modules/@chartiq/crossplot/*",
 				"node_modules/@chartiq/gonogo/*",
 				"node_modules/@chartiq/institutional/*",
-				"node_modules/@chartiq/scriptiq/*",
 				"node_modules/@chartiq/trading-central/*",
-				"node_modules/@chartiq/visual-earnings/*",
 				"node_modules/chartiq/*"
 			],
 			"keyDir/*": [

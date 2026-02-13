@@ -43,9 +43,6 @@ import getConfig from 'chartiq/js/defaultConfiguration';
 // chart2music will provide sonification (converting data into sound), support for screen readers, and keyboard handling capabilities.
 import 'chartiq/plugins/chart2music'
 
-// ScriptIQ
-// import 'chartiq/plugins/scriptiq/scriptiq';
-
 // SignalIQ
 import 'chartiq/plugins/signaliq/signaliqDialog';
 import 'chartiq/plugins/signaliq/signaliq-marker';
@@ -66,9 +63,6 @@ import 'chartiq/plugins/studybrowser';
 
 // Trading Central: Technical Views
 // import 'chartiq/plugins/technicalviews/components';
-
-// Visual Earnings
-// import 'chartiq/plugins/visualearnings/visualearnings';
 
 //  Uncomment the following for the L2 simulator (required for the crypto sample and MarketDepth addOn)
 // import 'chartiq/examples/feeds/L2_simulator'; /* for use with cryptoiq */
@@ -131,8 +125,7 @@ function getCustomConfig({
 		tfc,
 		technicalInsights,
 		technicalViews,
-		timeSpanEventPanel,
-		visualEarnings,
+		timeSpanEventPanel
 	} = config.plugins;
 
 	config.plugins = {
@@ -171,8 +164,7 @@ function getCustomConfig({
 		// 	//	return import('chartiq/plugins/technicalviews/components')
 		// 	// }
 		// },
-		// timeSpanEventPanel,
-		// visualEarnings
+		// timeSpanEventPanel
 	};
 
 /* Use dynamic load on demand as an alternative to static import */

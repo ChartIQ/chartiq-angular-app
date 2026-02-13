@@ -214,9 +214,9 @@ export class CustomChartService {
 
 	getDrawingTools() {
 		const { drawingToolDetails: details } = this;
-
-		return this.uiContext?.config?.drawingTools?.map(
-			({ label, shortcut, tool }) => {
+		const config = this.uiContext?.config as Config;
+		return config?.drawingTools?.map(
+			({ label, shortcut, tool }: { label: string; shortcut?: string; tool: string }) => {
 				return {
 					label,
 					tool,
@@ -229,8 +229,8 @@ export class CustomChartService {
 
 	setDrawingToolShortcuts(shortcuts: Record<string, string>) {
 		const { config, topNode } = this.uiContext || {};
-
-		config?.drawingTools?.forEach((item) => {
+		const drawingConfig = config as Config;
+		drawingConfig?.drawingTools?.forEach((item) => {
 			item.shortcut = shortcuts[item.tool];
 		});
 

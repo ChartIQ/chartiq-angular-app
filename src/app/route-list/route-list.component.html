@@ -23,7 +23,7 @@
 		<!-- <h3><a routerLink="/active-trader">Active Trader</a></h3> -->
 		<!-- Remove the following lines if the Active Trader module is available. -->
 		<h3 style="color: #999; margin-bottom: 0">Active Trader</h3>
-		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">(To enable this application, uncomment the Active Trader route in <i>app.module.ts</i> and enable the ActiveTraderComponent link in <i>route-list.component.html</i>.)</p>
+		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">(If your license package includes Active Trader plugin you can enable this application by uncommenting the Active Trader route in <i>app.routes.ts</i> and enable the ActiveTraderComponent link in <i>route-list.component.html</i>.)</p>
 		<p>
 			Features the advanced chart component enhanced with the following plug-ins:
 		</p>
@@ -34,18 +34,16 @@
 				<li>Market Depth Chart</li>
 			</ul>
 	</li>
-	<li>
-		<!-- <h3><a routerLink="/term-structure">Term Structure</a></h3> -->
-		<h3 style="color: #999; margin-bottom: 0">Term Structure</h3>
-		<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">
-			NOTE: TermStructure is presently incompatible with library web components version 9.1
-			<br/>
-			To use this chart, you need to import legacy web components. See the <a href="https://documentation.chartiq.com/tutorial-Upgradelog_9.0.0-9.1.2.html" target="_blank">upgrade guide</a> for more information on working with legacy web components. Comment out 'css/webcomponents.css' inside the src/app/chartiq-base-styles.scss and refresh the router URL for the term structure template.
-		</p>
-		<p>
-			Creates a term structure chart for working with non&ndash;time series data.
-		</p>
-	</li>
+	<!--
+		Enable the following line if Term Structure (Cross Section plugin) is available, and uncomment the Term Structure route in app.routes.ts.
+	-->
+	<!-- <h3><a routerLink="/term-structure">Term Structure</a></h3> -->
+	<!-- Remove the following lines if the Term Structure module (Cross Section plugin) is available. -->
+	<h3 style="color: #999; margin-bottom: 0">Term Structure</h3>
+	<p style="font-size: 0.75rem; margin-top: 0rem; margin-bottom: 0.75rem">(If your license package includes CrossSection plugin you can enable this application by uncommenting the Term Structure route in <i>app.routes.ts</i> and enable the TermStructureComponent link in <i>route-list.component.html</i>.)</p>
+	<p>
+		Creates a term structure chart for working with non&ndash;time series data.
+	</p>
 	<li>
 		<h3><a routerLink="/custom-chart">CustomChartComponent</a></h3>
 		<p>

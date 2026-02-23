@@ -29,17 +29,19 @@
 				"node_modules/chartiq/*"
 			]
 		},
-		"importHelpers": true,
-		"target": "es6",
-		"typeRoots": ["node_modules/@types", "src/types"],
-		"lib": ["es2020", "dom"]
+	"importHelpers": true,
+	"target": "es6",
+	"typeRoots": ["node_modules/@types", "node_modules/@chartiq", "src/types"],
+	"types": [],
+	"lib": ["es2020", "dom"],
+	"skipLibCheck": true
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
 		"strictInjectionParameters": true
 	},
 	"include": [
-    "src/**/*.ts",
-		"src/environments/environment.prod.ts"
-  ]
+		"src/**/*.ts",
+		"src/**/*.d.ts"
+	]
 }

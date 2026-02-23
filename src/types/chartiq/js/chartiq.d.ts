@@ -11,6 +11,9 @@ declare module 'chartiq/js/chartiq' {
 			interface Registry {}
 			interface QuoteFeed {}
 		}
+		namespace SVGChart {
+			function renderPieChart(params: unknown): void;
+		}
 	}
 
 	export namespace CIQ.UI {

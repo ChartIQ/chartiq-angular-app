@@ -18,7 +18,9 @@
 	"overrides": {
 		"tar": "^7.5.7",
 		"lodash": "^4.17.22",
-		"diff": "^4.0.4"
+		"diff": "^4.0.4",
+		"ajv": "^8.18.0",
+		"minimatch": "^10.2.1"
 	},
 	"dependencies": {
 		"@angular/animations": "~19.2.12",

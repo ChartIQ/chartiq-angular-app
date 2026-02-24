@@ -138,15 +138,14 @@ export class ActiveTraderComponent implements OnInit, OnDestroy {
 				Even: { index: 3 }
 			};
 
-			const pieChart=new CIQ.Visualization({
-				container: "cq-tradehistory-table div[pie-chart] div",
-				renderFunction: CIQ.SVGChart.renderPieChart,
-				colorRange: ["#8cc176","#b82c0c","#7c7c7c"],
-				className: "pie",
-				valueFormatter: CIQ.condenseInt
-			}).updateData(CIQ.clone(initialPieData));
-
-			let last: Element | null = null;
+		const pieChart=new CIQ.Visualization({
+			container: "cq-tradehistory-table div[pie-chart] div",
+			renderFunction: (CIQ as typeof CIQ & { SVGChart: { renderPieChart: (params: unknown) => void } }).SVGChart.renderPieChart,
+			colorRange: ["#8cc176","#b82c0c","#7c7c7c"],
+			className: "pie",
+			valueFormatter: CIQ.condenseInt
+		}).updateData(CIQ.clone(initialPieData));			
+		let last: Element | null = null;
 			stx.append("updateCurrentMarketData",function(data: object, chart?: CIQ.ChartEngine.Chart | null, symbol?: string | null) {
 				if(symbol) return;
 				const items = document.querySelectorAll("cq-tradehistory-body cq-item");

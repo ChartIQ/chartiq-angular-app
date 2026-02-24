@@ -8,7 +8,8 @@
     "src/test.ts",
     "src/**/*.spec.ts",
 		"src/app/active-trader-workstation/**",
-  	//"src/app/term-structure/**"
+  	"src/app/term-structure/**",
+    "src/environments/environment.prod.ts"
   ],
 	"include": [
     "src/main.ts",
